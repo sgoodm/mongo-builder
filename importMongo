@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# for use with Senegal format research releases
+
+# adds a "location_count" field to the locations.tsv file of research release
+# merges a research release tables into a MongoDB ready import and creates new Mongo database and collection
+# MongoDB database is the name of the country (as specified by user input)
+# MongoDB collection is "complete"
+
+# takes country name as input
+# must match folder name the release is located in
+# folder must container projects.tsv, transactions.tsv and locations.tsv
+
+# example use:
+# bash /home/detuser/Desktop/aiddata_releases/importMongo Senegal
+
+country=$1
+
+base='/home/detuser/Desktop/aiddata_releases/'
+
+if [[ -e $base'active/'$country && -e $base'active/'$country'/projects.tsv' && -e $base'active/'$country'/transactions.tsv' && -e $base'active/'$country'/locations.tsv' ]] ; then
+
+	mv $base'active/'$country'/locations.tsv' $base'active/'$country'/locations_original.tsv'
+	python $base'locationCount.py' $base'active/'$country'/locations_original.tsv' $base'active/'$country'/locations.tsv'
+
+	python $base'buildMongo.py' $base'active/'$country
+
+	mongoimport --db $country --collection complete --type json --file $base'active/'$country'/complete.json'
+
+	echo 'done'
+
+else
+	
+	echo 'error'
+
+fi
