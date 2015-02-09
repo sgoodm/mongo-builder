@@ -3,10 +3,10 @@
 # files for Senegal format research releases
 # 
 # use:
-# python /home/Desktop/aiddata_releases/buildMongo.py /home/user/Desktop/aiddata_releases/active/Senegal
+# python /var/www/html/aiddata/data/form/buildMongo.py /var/www/html/aiddata/data/form/active/Senegal
 #
 # to import into mongo use:
-# mongoimport --db Senegal --collection complete --type json --file /home/user/Desktop/aiddata_releases/active/Senegal/complete.json
+# mongoimport --db Senegal --collection complete --type json --file /var/www/html/aiddata/data/form/active/Senegal/complete.json
 #
 
 import sys
@@ -15,14 +15,14 @@ import simplejson as json
 from decimal import *
 # import pymongo
 
-# folder data is located in. example: /home/user/Desktop/aiddata_releases/active/Senegal
+# folder data is located in. example: /var/www/html/aiddata/data/form/active/Senegal
 in_folder = sys.argv[1]
 
 
 files = {
 
 	"projects" 		: in_folder + '/projects.tsv',
-	"locations" 	: in_folder + '/locations.tsv',
+	"locations" 	: in_folder + '/locations_update.tsv',
 	"transactions" 	: in_folder + '/transactions.tsv',
 	"ancillary" 	: in_folder + '/ancillary.tsv',
 	"complete" 		: in_folder + '/complete.json',
@@ -32,6 +32,7 @@ files = {
 num_list = {
 	"total_commitments",
 	"total_disbursements",
+	"location_count",
 	"transaction_value",
 	"transaction_year",
 	"precision_code",
@@ -117,4 +118,3 @@ with open (files["projects"], 'r') as projects:
 			# write row to json
 			rowjson = json.dumps(row, ensure_ascii=True, use_decimal=True)
 	 		writeJSON.write( rowjson + "\n" )
-

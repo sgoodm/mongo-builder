@@ -12,20 +12,93 @@
 # folder must container projects.tsv, transactions.tsv and locations.tsv
 
 # example use:
-# bash /home/detuser/Desktop/aiddata_releases/importMongo Senegal
+# bash /var/www/html/aiddata/data/form/importMongo Senegal
 
 country=$1
 
-base='/home/detuser/Desktop/aiddata_releases/'
+sectors=('Agriculture' 'Education' 'Health' 'Industry')
+start='2005'
+end='2014'
 
-if [[ -e $base'active/'$country && -e $base'active/'$country'/projects.tsv' && -e $base'active/'$country'/transactions.tsv' && -e $base'active/'$country'/locations.tsv' ]] ; then
+base='/var/www/html/aiddata/data/form/'
 
-	mv $base'active/'$country'/locations.tsv' $base'active/'$country'/locations_original.tsv'
-	python $base'locationCount.py' $base'active/'$country'/locations_original.tsv' $base'active/'$country'/locations.tsv'
+# make sure all files exists
+if [[ -e $base'active/'$country && -e $base'active/'$country'/projects.tsv' && -e $base'active/'$country'/transactions.tsv' && -e $base'active/'$country'/locations.tsv' ]]
 
+then
+	
+
+	# # if [[ -e $base'active/'$country'/locations_update.tsv']]
+	# # 	then
+	# # 		read -p "locations_update.tsv already exists for this country. Are you sure you want to continue? " -r
+	# # 		if [[ ! $REPLY =~ ^[Yy]$ ]]
+	# # 			then
+	# # 			    exit 1
+	# # 		fi
+	# # fi
+
+	# # create copy of locations file to use for processing
+	# # mv $base'active/'$country'/locations.tsv' $base'active/'$country'/locations_update.tsv'
+	
+
+	# update new locations file with location_count field
+	python $base'locationCount.py' $base'active/'$country'/locations.tsv' $base'active/'$country'/locations_update.tsv'
+
+	# build mongo ready JSON-like file
 	python $base'buildMongo.py' $base'active/'$country
 
-	mongoimport --db $country --collection complete --type json --file $base'active/'$country'/complete.json'
+	# import into new mongo db/collection
+	mongoimport --drop --db $country --collection complete --type json --file $base'active/'$country'/complete.json'
+
+
+	for i in "${sectors[@]}"
+
+	do
+
+		# # create csv using new mongo db/collection and build vrt
+		/usr/bin/php5 $base'buildCSV.php' $country $start $end $i
+
+		# # remove geojson if it exists (ogr will not overwrite)
+		if [[ -e $base'sector_data/'$country'_'$i'.geojson' ]]
+			then
+				rm $base'sector_data/'$country'_'$i'.geojson'
+		fi
+
+		# # create geojson using vrt
+		ogr2ogr -f GeoJSON $base'sector_data/'$country'_'$i'.geojson' $base'sector_data/'$country'_'$i'.vrt'
+
+		# # run PET extract with geojson for each raster
+		python '/var/www/html/aiddata/PET/extract.py' 'vector' $base'sector_data/'$country'_'$i'.geojson' 'project_id' 'longitude' 'latitude' '/var/www/html/aiddata/DET/uploads/globals/processed/agriculture__actual_potential_yield_gap__2000/gap2000_gap_2000_hi_cl.tif' $base'extract_data/'$country'_'$i'_Yield.csv' 'agriculture__actual_potential_yield_gap__2000' 'transaction_sum,location_count'
+		python '/var/www/html/aiddata/PET/extract.py' 'vector' $base'sector_data/'$country'_'$i'.geojson' 'project_id' 'longitude' 'latitude' '/var/www/html/aiddata/DET/uploads/globals/processed/socioeconomics__local_economic_activity__1995/nord_gcgpp05.tif' $base'extract_data/'$country'_'$i'_Income.csv' 'socioeconomics__local_economic_activity__1995' 'transaction_sum,location_count'
+		python '/var/www/html/aiddata/PET/extract.py' 'vector' $base'sector_data/'$country'_'$i'.geojson' 'project_id' 'longitude' 'latitude' '/var/www/html/aiddata/DET/uploads/globals/processed/socioeconomics__urban_areas__1995/glurextents.asc' $base'extract_data/'$country'_'$i'_Urban.csv' 'socioeconomics__urban_areas__1995' 'transaction_sum,location_count'
+
+		# # join results to $base'extract_data/'$country'_'$i'.csv'
+		/usr/bin/php5 $base'joinExtract.php' $country $i
+
+		# check if country / sector is in buildJSON
+		# replace if it exists
+		# add if it does not exist
+		new_line="python /var/www/html/aiddata/data/form/calc.py /var/www/html/aiddata/data/form/form_data/"$country"_"$i".csv $i $country transaction_sum location_count"
+		FILE=$base'buildJSON'
+		same="0"
+		while read line
+		do
+			if [[ $line = $new_line  ]]
+			then
+				same="1"
+			fi
+		done < $FILE
+
+		if [[ $same = "0" ]]
+		then
+			echo -e $new_line >> $base'buildJSON'
+
+		fi
+
+	done
+
+
+	bash $base'buildJSON'
 
 	echo 'done'
 

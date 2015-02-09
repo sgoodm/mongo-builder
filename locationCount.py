@@ -1,7 +1,7 @@
 #
 # adds "location_count" field with number of locations associated with each project to flat csv
 #
-# python /home/detuser/Desktop/aiddata_releases/dataSplit.py /home/detuser/Desktop/aiddata_releases/active/Senegal/locations_original.csv /home/detuser/Desktop/aiddata_releases/active/Senegal/locations.csv
+# python /var/www/html/aiddata/data/form/dataSplit.py /var/www/html/aiddata/data/form/active/Senegal/locations_original.csv /var/www/html/aiddata/data/form/active/Senegal/locations.csv
 #
 
 import struct
@@ -46,7 +46,7 @@ with open (myData, 'rb') as updateCSV:
 	csvData.fieldnames.append("location_count")
 	# csvData.fieldnames.extend(("count", "new"))
 
-	with open(myOutput, 'wb') as writeCSV:
+	with open(myOutput, 'w') as writeCSV:
 		csvWrite = csv.DictWriter(writeCSV, delimiter=writeDelim, fieldnames=csvData.fieldnames)
 
 		# write new header
@@ -61,7 +61,3 @@ with open (myData, 'rb') as updateCSV:
 			
 			# write new row
 			csvWrite.writerow(row)
-
-
-	
-

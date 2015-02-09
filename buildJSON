@@ -1,0 +1,22 @@
+#!/bin/bash
+
+python /var/www/html/aiddata/data/form/calc.py /var/www/html/aiddata/data/form/form_data/Nepal_Agriculture.csv Agriculture Nepal total_c_to_2012 count
+python /var/www/html/aiddata/data/form/calc.py /var/www/html/aiddata/data/form/form_data/Nepal_Education.csv Education Nepal total_c_to_2012 count
+python /var/www/html/aiddata/data/form/calc.py /var/www/html/aiddata/data/form/form_data/Nepal_Health.csv Health Nepal total_c_to_2012 count
+python /var/www/html/aiddata/data/form/calc.py /var/www/html/aiddata/data/form/form_data/Nepal_Industry.csv Industry Nepal total_c_to_2012 count
+python /var/www/html/aiddata/data/form/calc.py /var/www/html/aiddata/data/form/form_data/Uganda_Agriculture.csv Agriculture Uganda total_c_to_2010_USD2011 count
+python /var/www/html/aiddata/data/form/calc.py /var/www/html/aiddata/data/form/form_data/Uganda_Education.csv Education Uganda total_c_to_2010_USD2011 count
+python /var/www/html/aiddata/data/form/calc.py /var/www/html/aiddata/data/form/form_data/Uganda_Health.csv Health Uganda total_c_to_2010_USD2011 count
+python /var/www/html/aiddata/data/form/calc.py /var/www/html/aiddata/data/form/form_data/Uganda_Industry.csv Industry Uganda total_c_to_2010_USD2011 count
+python /var/www/html/aiddata/data/form/calc.py /var/www/html/aiddata/data/form/form_data/Malawi_Agriculture.csv Agriculture Malawi total_c_to_2011 count
+python /var/www/html/aiddata/data/form/calc.py /var/www/html/aiddata/data/form/form_data/Malawi_Education.csv Education Malawi total_c_to_2011 count
+python /var/www/html/aiddata/data/form/calc.py /var/www/html/aiddata/data/form/form_data/Malawi_Health.csv Health Malawi total_c_to_2011 count
+python /var/www/html/aiddata/data/form/calc.py /var/www/html/aiddata/data/form/form_data/Malawi_Industry.csv Industry Malawi total_c_to_2011 count
+python /var/www/html/aiddata/data/form/calc.py /var/www/html/aiddata/data/form/form_data/Senegal_Agriculture.csv Agriculture Senegal transaction_sum location_count
+python /var/www/html/aiddata/data/form/calc.py /var/www/html/aiddata/data/form/form_data/Senegal_Education.csv Education Senegal transaction_sum location_count
+python /var/www/html/aiddata/data/form/calc.py /var/www/html/aiddata/data/form/form_data/Senegal_Health.csv Health Senegal transaction_sum location_count
+python /var/www/html/aiddata/data/form/calc.py /var/www/html/aiddata/data/form/form_data/Senegal_Industry.csv Industry Senegal transaction_sum location_count
+python /var/www/html/aiddata/data/form/calc.py /var/www/html/aiddata/data/form/form_data/Timor-Leste_Agriculture.csv Agriculture Timor-Leste transaction_sum location_count
+python /var/www/html/aiddata/data/form/calc.py /var/www/html/aiddata/data/form/form_data/Timor-Leste_Education.csv Education Timor-Leste transaction_sum location_count
+python /var/www/html/aiddata/data/form/calc.py /var/www/html/aiddata/data/form/form_data/Timor-Leste_Health.csv Health Timor-Leste transaction_sum location_count
+python /var/www/html/aiddata/data/form/calc.py /var/www/html/aiddata/data/form/form_data/Timor-Leste_Industry.csv Industry Timor-Leste transaction_sum location_count
