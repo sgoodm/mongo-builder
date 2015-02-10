@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# for use with pre-Senegal format research releases in an existing MongoDB
+
+# does NOT standardize data
+# does NOT load data into a mongo database
+# does NOT update form_data.json
+
+# takes country name as input
+# country name must match existing mongo database name
+
+# example use:
+# bash /var/www/html/aiddata/data/form/runMongo_presenegal Nepal
+
+country=$1
+
+sectors=('Agriculture' 'Education' 'Health' 'Industry')
+
+base='/var/www/html/aiddata/data/form/'
+
+for i in "${sectors[@]}"
+
+do
+
+	# # create csv using new mongo db/collection and build vrt
+	/usr/bin/php5 $base'buildCSV_presenegal.php' $country $i
+
+	# # remove geojson if it exists (ogr will not overwrite)
+	if [[ -e $base'sector_data/'$country'_'$i'.geojson' ]]
+		then
+			rm $base'sector_data/'$country'_'$i'.geojson'
+	fi
+
+	# # create geojson using vrt
+	ogr2ogr -f GeoJSON $base'sector_data/'$country'_'$i'.geojson' $base'sector_data/'$country'_'$i'.vrt'
+
+
+done
+
+echo 'done'
+echo -e '\n'
