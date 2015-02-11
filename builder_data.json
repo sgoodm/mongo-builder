@@ -1,0 +1,78 @@
+{
+	"country_data": {
+		"Nepal": {
+			"info": [1.3, 3.5],
+			"line": [1.36, 2.35],
+			"continent": "Asia",
+			"type": "old"
+		},
+		"Uganda": {
+			"info": [1.5, 1.9],
+			"line": [1.67, 1.69],
+			"continent": "Africa",
+			"type": "old"
+		},
+		"Malawi": {
+			"info": [1.65, 1.15],
+			"line": [1.67, 1.43],
+			"continent": "Africa",
+			"type": "old"
+		},
+		"Senegal": {
+			"info": [2.6, 2.6],
+			"line": [2.2, 1.99],
+			"continent": "Africa",
+			"type": "new"
+		},
+		"Timor-Leste": {
+			"info": [1.35, 1.4],
+			"line": [1.175, 1.52],
+			"continent": "Asia",
+			"type": "new"
+		}
+	},
+	"raster_data": [
+		{
+			"name":"Low_Yield",
+			"folder":"agriculture__actual_potential_yield_gap__2000",
+			"file":"gap2000_gap_2000_hi_cl.tif",
+			"stats": {
+				"type": "variable",
+				"raw": [],
+				"sd": 0,
+				"quart": 0,
+				"mean": 0,
+				"thresh": 0
+			}
+		},
+		{
+			"name":"Low_Income",
+			"folder":"socioeconomics__local_economic_activity__1995",
+			"file":"nord_gcgpp05.tif",
+			"stats": {
+				"type": "variable",
+				"raw": [],
+				"sd": 0,
+				"quart": 0,
+				"mean": 0,
+				"thresh": 0
+			}
+		},
+		{
+			"name":"Urban_Area",
+			"folder":"socioeconomics__urban_areas__1995",
+			"file":"glurextents.asc",
+			"stats": {
+				"type": "fixed",
+				"raw": [],
+				"sd": 0,
+				"quart": 0,
+				"mean": 0,
+				"thresh": 0
+			}
+		}
+
+	]
+		
+	
+}
