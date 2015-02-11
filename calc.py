@@ -168,15 +168,15 @@ with open(in_out, 'r') as json_handle:
 	except:
 		# init json if file is empty
 		json_full = {	
-						"Global":{"Total":{},"Agriculture":{},"Education":{},"Health":{},"Industry":{}},
-						in_country:{"Total":{},"Agriculture":{},"Education":{},"Health":{},"Industry":{}}
+						"Global":{"Total":{},"Agriculture":{},"Education":{},"Health":{},"Industry":{},"Water":{},"Other":{}},
+						in_country:{"Total":{},"Agriculture":{},"Education":{},"Health":{},"Industry":{},"Water":{},"Other":{}}
 					}
 
 
 
 	# init input country if it does not exist
 	if not in_country in json_full:
-		json_full[in_country] = {"Total":{},"Agriculture":{},"Education":{},"Health":{},"Industry":{}}
+		json_full[in_country] = {"Total":{},"Agriculture":{},"Education":{},"Health":{},"Industry":{},"Water":{},"Other":{}}
 
 	# replace input country>type with new json_data
 	json_full[in_country][in_type] = json_data
@@ -203,7 +203,7 @@ with open(in_out, 'r') as json_handle:
 
 	# init "Global" if it does not exist
 	if not "Global" in json_full :
-		json_full["Global"] = {"Total":{},"Agriculture":{},"Education":{},"Health":{},"Industry":{}}
+		json_full["Global"] = {"Total":{},"Agriculture":{},"Education":{},"Health":{},"Industry":{},"Water":{},"Other":{}}
 
 	# clear "Global">type amnd "Global">"Total" before it is recalculated using new input data
 	json_full["Global"][in_type] = blank_json_data.copy()
@@ -212,7 +212,7 @@ with open(in_out, 'r') as json_handle:
 
 	# update Global data
 	for j_country in json_full:
-		if j_country != "Global":
+		if j_country != "Global" and in_type in json_full[j_country]:
 			
 			# update "Global">type
 			for j_data in json_full[j_country][in_type]:

@@ -1,43 +1,43 @@
 {
     "Global": {
         "Agriculture": {
-            "ag_per": 79.05, 
-            "ag_tot": 1517668944.8, 
-            "ec_per": 45.14, 
+            "ag_per": 79.19, 
+            "ag_tot": 1530723029.19, 
+            "ec_per": 44.83, 
             "ec_tot": 866586159.66, 
             "ed_per": 0.0, 
             "ed_tot": 0.0, 
-            "projects": 2896.0, 
-            "total": 1919892542.16, 
+            "projects": 2913.0, 
+            "total": 1932946626.55, 
             "type": "Agriculture", 
-            "ur_per": 13.1, 
-            "ur_tot": 251428746.15
+            "ur_per": 13.14, 
+            "ur_tot": 254039563.03
         }, 
         "Education": {
-            "ag_per": 90.74, 
-            "ag_tot": 1656874644.39, 
-            "ec_per": 33.48, 
-            "ec_tot": 611342684.4, 
+            "ag_per": 89.89, 
+            "ag_tot": 1852431396.73, 
+            "ec_per": 34.27, 
+            "ec_tot": 706218222.94, 
             "ed_per": 0.0, 
             "ed_tot": 0.0, 
-            "projects": 5852.0, 
-            "total": 1825882666.1, 
+            "projects": 5954.0, 
+            "total": 2060854240.85, 
             "type": "Education", 
-            "ur_per": 10.3, 
-            "ur_tot": 188123476.3
+            "ur_per": 14.89, 
+            "ur_tot": 306792203.74
         }, 
         "Health": {
-            "ag_per": 92.95, 
-            "ag_tot": 4571418011.15, 
-            "ec_per": 26.28, 
-            "ec_tot": 1292357982.91, 
+            "ag_per": 92.11, 
+            "ag_tot": 4104875320.04, 
+            "ec_per": 21.74, 
+            "ec_tot": 969045497.47, 
             "ed_per": 0.0, 
             "ed_tot": 0.0, 
-            "projects": 9833.0, 
-            "total": 4918168686.23, 
+            "projects": 8326.0, 
+            "total": 4456594629.21, 
             "type": "Health", 
-            "ur_per": 18.91, 
-            "ur_tot": 930188302.4
+            "ur_per": 15.89, 
+            "ur_tot": 708204183.41
         }, 
         "Industry": {
             "ag_per": 85.82, 
@@ -52,18 +52,44 @@
             "ur_per": 35.83, 
             "ur_tot": 144388868.76
         }, 
-        "Total": {
-            "ag_per": 89.25, 
-            "ag_tot": 8091791937.79, 
-            "ec_per": 32.02, 
-            "ec_tot": 2903148555.55, 
+        "Other": {
+            "ag_per": 77.09, 
+            "ag_tot": 7136961689.36, 
+            "ec_per": 32.18, 
+            "ec_tot": 2978695448.1, 
             "ed_per": 0.0, 
             "ed_tot": 0.0, 
-            "projects": 19698.0, 
-            "total": 9066929012.69, 
+            "projects": 7456.0, 
+            "total": 9257605011.68, 
+            "type": "Other", 
+            "ur_per": 29.33, 
+            "ur_tot": 2715154369.21
+        }, 
+        "Total": {
+            "ag_per": 82.13, 
+            "ag_tot": 12043802265.54, 
+            "ec_per": 36.08, 
+            "ec_tot": 5291619423.39, 
+            "ed_per": 0.0, 
+            "ed_tot": 0.0, 
+            "projects": 25214.0, 
+            "total": 14664610465.05, 
             "type": "Total", 
-            "ur_per": 16.7, 
-            "ur_tot": 1514129393.61
+            "ur_per": 25.7, 
+            "ur_tot": 3768704385.09
+        }, 
+        "Water": {
+            "ag_per": 94.41, 
+            "ag_tot": 795170330.83, 
+            "ec_per": 57.24, 
+            "ec_tot": 482165835.96, 
+            "ed_per": 0.0, 
+            "ed_tot": 0.0, 
+            "projects": 1735.0, 
+            "total": 842294607.98, 
+            "type": "Water", 
+            "ur_per": 33.54, 
+            "ur_tot": 282521687.88
         }
     }, 
     "Malawi": {
@@ -135,17 +161,17 @@
     }, 
     "Nepal": {
         "Agriculture": {
-            "ag_per": 98.86, 
-            "ag_tot": 412411981.92, 
-            "ec_per": 41.35, 
+            "ag_per": 98.89, 
+            "ag_tot": 425466066.31, 
+            "ec_per": 40.09, 
             "ec_tot": 172496900.82, 
             "ed_per": 0.0, 
             "ed_tot": 0.0, 
-            "projects": 1469.0, 
-            "total": 417184669.19, 
+            "projects": 1486.0, 
+            "total": 430238753.58, 
             "type": "Agriculture", 
-            "ur_per": 12.87, 
-            "ur_tot": 53697816.18
+            "ur_per": 13.09, 
+            "ur_tot": 56308633.06
         }, 
         "Education": {
             "ag_per": 97.66, 
@@ -161,17 +187,17 @@
             "ur_tot": 76941400.11
         }, 
         "Health": {
-            "ag_per": 98.95, 
-            "ag_tot": 1372874399.24, 
-            "ec_per": 40.93, 
-            "ec_tot": 567912315.13, 
+            "ag_per": 98.44, 
+            "ag_tot": 824987201.73, 
+            "ec_per": 20.23, 
+            "ec_tot": 169553318.19, 
             "ed_per": 0.0, 
             "ed_tot": 0.0, 
-            "projects": 7809.0, 
-            "total": 1387387080.19, 
+            "projects": 6261.0, 
+            "total": 838087896.26, 
             "type": "Health", 
-            "ur_per": 21.72, 
-            "ur_tot": 301322857.43
+            "ur_per": 8.34, 
+            "ur_tot": 69884552.44
         }, 
         "Industry": {
             "ag_per": 99.47, 
@@ -186,18 +212,44 @@
             "ur_per": 12.73, 
             "ur_tot": 3969740.83
         }, 
-        "Total": {
-            "ag_per": 98.49, 
-            "ag_tot": 2767862138.8, 
-            "ec_per": 35.09, 
-            "ec_tot": 985944481.55, 
+        "Other": {
+            "ag_per": 99.61, 
+            "ag_tot": 3210170902.19, 
+            "ec_per": 20.75, 
+            "ec_tot": 668717443.59, 
             "ed_per": 0.0, 
             "ed_tot": 0.0, 
-            "projects": 15078.0, 
-            "total": 2810155397.02, 
+            "projects": 5903.0, 
+            "total": 3222786248.39, 
+            "type": "Other", 
+            "ur_per": 12.1, 
+            "ur_tot": 389908716.64
+        }, 
+        "Total": {
+            "ag_per": 99.09, 
+            "ag_tot": 5991113319.37, 
+            "ec_per": 27.37, 
+            "ec_tot": 1654688119.14, 
+            "ed_per": 0.0, 
+            "ed_tot": 0.0, 
+            "projects": 21000.0, 
+            "total": 6046021923.79, 
             "type": "Total", 
-            "ur_per": 15.51, 
-            "ur_tot": 435931814.55
+            "ur_per": 13.7, 
+            "ur_tot": 828477542.06
+        }, 
+        "Water": {
+            "ag_per": 99.74, 
+            "ag_tot": 547913391.5, 
+            "ec_per": 72.52, 
+            "ec_tot": 398385190.94, 
+            "ed_per": 0.0, 
+            "ed_tot": 0.0, 
+            "projects": 1550.0, 
+            "total": 549325377.92, 
+            "type": "Water", 
+            "ur_per": 42.14, 
+            "ur_tot": 231464498.98
         }
     }, 
     "Senegal": {
@@ -215,30 +267,30 @@
             "ur_tot": 83961599.76
         }, 
         "Education": {
-            "ag_per": 82.22, 
-            "ag_tot": 15567761.66, 
-            "ec_per": 54.1, 
-            "ec_tot": 10243665.4, 
+            "ag_per": 83.15, 
+            "ag_tot": 211124514.0, 
+            "ec_per": 41.4, 
+            "ec_tot": 105119203.94, 
             "ed_per": 0.0, 
             "ed_tot": 0.0, 
-            "projects": 21.0, 
-            "total": 18934082.97, 
+            "projects": 123.0, 
+            "total": 253905657.72, 
             "type": "Education", 
-            "ur_per": 37.59, 
-            "ur_tot": 7117527.59
+            "ur_per": 49.54, 
+            "ur_tot": 125786255.03
         }, 
         "Health": {
-            "ag_per": 89.28, 
-            "ag_tot": 568332081.28, 
-            "ec_per": 14.65, 
-            "ec_tot": 93240070.22, 
+            "ag_per": 89.58, 
+            "ag_tot": 640161853.06, 
+            "ec_per": 22.2, 
+            "ec_tot": 158637029.88, 
             "ed_per": 0.0, 
             "ed_tot": 0.0, 
-            "projects": 72.0, 
-            "total": 636589165.81, 
+            "projects": 108.0, 
+            "total": 714664740.88, 
             "type": "Health", 
-            "ur_per": 28.62, 
-            "ur_tot": 182183661.73
+            "ur_per": 26.82, 
+            "ur_tot": 191637847.73
         }, 
         "Industry": {
             "ag_per": 84.51, 
@@ -253,18 +305,44 @@
             "ur_per": 50.54, 
             "ur_tot": 120395308.62
         }, 
-        "Total": {
-            "ag_per": 82.53, 
-            "ag_tot": 1210373735.08, 
-            "ec_per": 39.02, 
-            "ec_tot": 572220373.73, 
+        "Other": {
+            "ag_per": 61.15, 
+            "ag_tot": 3079590583.39, 
+            "ec_per": 26.09, 
+            "ec_tot": 1314050672.62, 
             "ed_per": 0.0, 
             "ed_tot": 0.0, 
-            "projects": 232.0, 
-            "total": 1466513352.43, 
+            "projects": 361.0, 
+            "total": 5035895755.44, 
+            "type": "Other", 
+            "ur_per": 44.38, 
+            "ur_tot": 2234721536.78
+        }, 
+        "Total": {
+            "ag_per": 67.42, 
+            "ag_tot": 4746879064.81, 
+            "ec_per": 29.29, 
+            "ec_tot": 2062219373.18, 
+            "ed_per": 0.0, 
+            "ed_tot": 0.0, 
+            "projects": 781.0, 
+            "total": 7040320671.36, 
             "type": "Total", 
-            "ur_per": 26.84, 
-            "ur_tot": 393658097.7
+            "ur_per": 39.72, 
+            "ur_tot": 2796144699.12
+        }, 
+        "Water": {
+            "ag_per": 84.29, 
+            "ag_tot": 189528222.22, 
+            "ec_per": 6.97, 
+            "ec_tot": 15675828.63, 
+            "ed_per": 0.0, 
+            "ed_tot": 0.0, 
+            "projects": 50.0, 
+            "total": 224864413.67, 
+            "type": "Water", 
+            "ur_per": 17.63, 
+            "ur_tot": 39642151.2
         }
     }, 
     "Timor-Leste": {
@@ -295,16 +373,16 @@
             "ur_tot": 33257866.56
         }, 
         "Health": {
-            "ag_per": 79.29, 
-            "ag_tot": 117666685.31, 
+            "ag_per": 80.47, 
+            "ag_tot": 127181419.93, 
             "ec_per": 100.0, 
-            "ec_tot": 148402557.79, 
+            "ec_tot": 158052109.63, 
             "ed_per": 0.0, 
             "ed_tot": 0.0, 
-            "projects": 722.0, 
-            "total": 148402557.79, 
+            "projects": 727.0, 
+            "total": 158052109.63, 
             "type": "Health", 
-            "ur_per": 4.77, 
+            "ur_per": 4.48, 
             "ur_tot": 7076784.42
         }, 
         "Industry": {
@@ -320,18 +398,44 @@
             "ur_per": 0.0, 
             "ur_tot": 0.0
         }, 
-        "Total": {
-            "ag_per": 78.03, 
-            "ag_tot": 391366225.85, 
-            "ec_per": 99.89, 
-            "ec_tot": 501030230.95, 
+        "Other": {
+            "ag_per": 84.81, 
+            "ag_tot": 847200203.78, 
+            "ec_per": 99.7, 
+            "ec_tot": 995927331.89, 
             "ed_per": 0.0, 
             "ed_tot": 0.0, 
-            "projects": 2101.0, 
-            "total": 501590493.82, 
+            "projects": 1192.0, 
+            "total": 998923007.85, 
+            "type": "Other", 
+            "ur_per": 9.06, 
+            "ur_tot": 90524115.79
+        }, 
+        "Total": {
+            "ag_per": 82.74, 
+            "ag_tot": 1305809881.36, 
+            "ec_per": 99.77, 
+            "ec_tot": 1574711931.07, 
+            "ed_per": 0.0, 
+            "ed_tot": 0.0, 
+            "projects": 3433.0, 
+            "total": 1578267869.9, 
             "type": "Total", 
-            "ur_per": 8.4, 
-            "ur_tot": 42142990.42
+            "ur_per": 9.13, 
+            "ur_tot": 144082143.91
+        }, 
+        "Water": {
+            "ag_per": 84.76, 
+            "ag_tot": 57728717.11, 
+            "ec_per": 100.0, 
+            "ec_tot": 68104816.39, 
+            "ed_per": 0.0, 
+            "ed_tot": 0.0, 
+            "projects": 135.0, 
+            "total": 68104816.39, 
+            "type": "Water", 
+            "ur_per": 16.76, 
+            "ur_tot": 11415037.7
         }
     }, 
     "Uganda": {

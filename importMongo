@@ -16,7 +16,8 @@
 
 country=$1
 
-sectors=('Agriculture' 'Education' 'Health' 'Industry')
+sectors=('Agriculture' 'Education' 'Health' 'Industry' 'Water' 'Other')
+
 start='2005'
 end='2014'
 
@@ -27,28 +28,28 @@ if [[ -e $base'active/'$country && -e $base'active/'$country'/projects.tsv' && -
 
 then
 	
+	
+	# if [[ -e $base'active/'$country'/locations_update.tsv']]
+	# 	then
+	# 		read -p "locations_update.tsv already exists for this country. Are you sure you want to continue? " -r
+	# 		if [[ ! $REPLY =~ ^[Yy]$ ]]
+	# 			then
+	# 			    exit 1
+	# 		fi
+	# fi
 
-	# # if [[ -e $base'active/'$country'/locations_update.tsv']]
-	# # 	then
-	# # 		read -p "locations_update.tsv already exists for this country. Are you sure you want to continue? " -r
-	# # 		if [[ ! $REPLY =~ ^[Yy]$ ]]
-	# # 			then
-	# # 			    exit 1
-	# # 		fi
-	# # fi
-
-	# # create copy of locations file to use for processing
-	# # mv $base'active/'$country'/locations.tsv' $base'active/'$country'/locations_update.tsv'
+	# create copy of locations file to use for processing
+	# mv $base'active/'$country'/locations.tsv' $base'active/'$country'/locations_update.tsv'
 	
 
 	# update new locations file with location_count field
-	python $base'locationCount.py' $base'active/'$country'/locations.tsv' $base'active/'$country'/locations_update.tsv'
+	# python $base'locationCount.py' $base'active/'$country'/locations.tsv' $base'active/'$country'/locations_update.tsv'
 
 	# build mongo ready JSON-like file
-	python $base'buildMongo.py' $base'active/'$country
+	# python $base'buildMongo.py' $base'active/'$country
 
 	# import into new mongo db/collection
-	mongoimport --drop --db $country --collection complete --type json --file $base'active/'$country'/complete.json'
+	# mongoimport --drop --db $country --collection complete --type json --file $base'active/'$country'/complete.json'
 
 
 	for i in "${sectors[@]}"
