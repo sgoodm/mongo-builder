@@ -5,6 +5,7 @@ import csv
 import json
 
 base = '/var/www/html/aiddata/data/form/'
+
 country = sys.argv[1]
 sector = sys.argv[2]
 
@@ -12,116 +13,120 @@ myData = base+'sector_data/'+country+'_'+sector+'.geojson'
 myId = "project_id"
 myLon = "longitude"
 myLat = "latitude"
-myInclude = "transaction_sum,location_count"
 
 # read in builder_data.json
-with open('builder_data.json', 'w') as json_handle:
+json_handle = open('/var/www/html/aiddata/data/form/builder_data.json', 'r')
 
-	# create country_data entry for country if it does not exists
-	if not json_handle.country_data[country]:
+# load existing json
+json_full = json.load(json_handle)
 
-		json_handle.country_data[country] = {"info": [1,1], "line":[1,1], "continent":"", "type":"new"}
+# json validation
+#
 
-	 	json.dump(json_full, json_handle, sort_keys = True, indent = 4, ensure_ascii=False)
+# create country_data entry for country if it does not exists
+new_country = False
+if not json_full['country_data'][country]:
+	new_country = True
+	json_full['country_data']['TEST'] = {"info": [1,1], "line":[1,1], "continent":"", "type":"new"}
 
-	# for each raster_data item
-	for item in json_handle.raster_data
+myInclude = "transaction_sum,location_count"
+if json_full['country_data'][country]['type'] == "old":
+	myInclude = "total_commitments,location_count"
 
-		rname = item.name
-		rfolder = item.folder
-		rfile = item.file
+# build header(s)
+header =  myId +","+ myLon +","+ myLat
 
-		myRaster = '/var/www/html/aiddata/DET/uploads/globals/processed/'+rfolder+'/'+rfile
-		myOutput = base+'extract_data/'+country+'_'+sector+'_'+rname+'.csv'
-		myName = rname
+includes = myInclude.split(",")
+for field in range(0, len(includes)):
+	header += "," + includes[field] 
 
-		src_filename = myRaster
-		src_ds=gdal.Open(src_filename) 
-		gt=src_ds.GetGeoTransform()
-		rb=src_ds.GetRasterBand(1)
+full_header = header
+for item in json_full['raster_data']:
+	full_header += "," + item['name']
 
-		with open(myOutput, 'w') as f:
-			header =  myId +","+ myLon +","+ myLat +","
+# for each raster_data item run extractions and build csv
+count = len(json_full['raster_data'])
+join = {}
 
-			includes = myInclude.split(",")
+for i in range(0, count):
+
+	rname =  json_full['raster_data'][i]['name']
+	rfolder =  json_full['raster_data'][i]['folder']
+	rfile =  json_full['raster_data'][i]['file']
+
+	myRaster = '/var/www/html/aiddata/DET/uploads/globals/processed/'+rfolder+'/'+rfile
+	myOutput = base+'extract_data/'+country+'_'+sector+'_'+rname+'_test.csv'
+
+	# load raster
+	src_filename = myRaster
+	src_ds=gdal.Open(src_filename) 
+	gt=src_ds.GetGeoTransform()
+	rb=src_ds.GetRasterBand(1)
+
+	# open output for this raster extract
+	with open(myOutput, 'w') as f:
+
+		f.write(header + "," + rname + "\n")
+
+		shp_filename = myData
+		ds=ogr.Open(shp_filename)
+		lyr=ds.GetLayer()
+
+		for feat in lyr:
+			geom = feat.GetGeometryRef()
+			field_vals = []
+
+			feat_id = feat.GetField(myId)
+
 			for field in range(0, len(includes)):
-				header += includes[field] + ","  
-			
-			header += myName + "\n" 
-			f.write(header)
-			
-			c = 0
+				try:
+					field_vals.append( feat.GetField(includes[field]) )
+				except:
+					field_vals.append( "BAD" )
 
-				shp_filename = myData
-				ds=ogr.Open(shp_filename)
-				lyr=ds.GetLayer()
+			mx,my=geom.GetX(), geom.GetY()  #coord in map units
 
-				for feat in lyr:
-					geom = feat.GetGeometryRef()
-					field_vals = []
+			#Convert from map to pixel coordinates.
+			px = int((mx - gt[0]) / gt[1]) #x pixel
+			py = int((my - gt[3]) / gt[5]) #y pixel
 
-					try:
-						feat_id = feat.GetField(myId)
-					except:
-						feat_id = c
+			structval=rb.ReadRaster(px,py,1,1,buf_type=gdal.GDT_Float32)
+			intval = struct.unpack('f' , structval) 
 
-					for field in range(0, len(includes)):
-						try:
-							field_vals.append( feat.GetField(includes[field]) )
-						except:
-							field_vals.append( "BAD" )
+			newRow = str(feat_id) + "," + str(mx) + "," + str(my) 
 
-					
-					c += 1
+			for field in range(0, len(includes)):
+				newRow += "," + str(field_vals[field]) 
 
-					mx,my=geom.GetX(), geom.GetY()  #coord in map units
+			newRow += "," + str(intval[0])
 
-					#Convert from map to pixel coordinates.
-					#Only works for geotransforms with no rotation.
-					px = int((mx - gt[0]) / gt[1]) #x pixel
-					py = int((my - gt[3]) / gt[5]) #y pixel
+			f.write(newRow + "\n")
 
-					structval=rb.ReadRaster(px,py,1,1,buf_type=gdal.GDT_Float32)
-					intval = struct.unpack('f' , structval) 
+			# END FEATURE LOOP
 
-					newRow = str(feat_id) + "," + str(mx) + "," + str(my) + "," 
+		# CLOSE EXTRACT FILE
 
-					for field in range(0, len(includes)):
-						newRow += str(field_vals[field]) + "," 
+	# open csv for joining
+	join[i] = csv.reader(open(myOutput,"r"))
 
-					newRow += str(intval[0])+"\n"
+	# END JSON LOOP
 
-					f.write(newRow)
 
 # join extracts
+joined = open(base+'form_data/'+country+'_'+sector+'.csv','w+')
 
-	# OLD PHP JOIN SCRIPT
+for row in join[0]:
 
-	# $country = $argv[1];
-	# $sector = $argv[2];
+	outRow = ','.join(row)
+	for i in range(1,count):
+		outRow += ',' + join[i].next()[len(row)-1]
+	
+	joined.write( outRow + "\n" )
 
-	# // open files
-	# $base = '/var/www/html/aiddata/data/form/extract_data/'.$country.'_'.$sector;
-	# $handles = array();
-	# 	$handles[0] = fopen( $base . "_Yield.csv", "r" ); 
-	# 	$handles[1] = fopen( $base . "_Income.csv", "r" ); 
-	# 	$handles[2] = fopen( $base . "_Urban.csv", "r" ); 
-	# $outHandle = fopen('/var/www/html/aiddata/data/form/form_data/'.$country.'_'.$sector.'.csv', "w");
 
-	# // join files
-	# while ($fRow = fgetcsv($handles[0])){
-	# 	$outRow = $fRow;
-	# 	for ($i=1; $i<count($handles); $i++){
-	# 		$outRow[] = fgetcsv($handles[$i])[count($fRow)-1];
-	# 	}
-	# 	fwrite($outHandle, implode($outRow, ",")."\n");
-	# }
-
-	# // close files
-	# for ($i=0; $i<3; $i++) {		
-	# 	fclose( $handles[$i] );
-	# }
-	# fclose($outHandle);
-
-	# echo "joinExtract.php : done";
-
+# update builder_data.json if country is new
+if new_country == True:
+	# open json for writing
+	with open('/var/www/html/aiddata/data/form/builder_data.json', 'w') as json_handle:
+		# dump json back into file
+	 	json.dump(json_full, json_handle, sort_keys = True, indent = 4, ensure_ascii=False)

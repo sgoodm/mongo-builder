@@ -35,13 +35,21 @@ do
 	ogr2ogr -f GeoJSON $base'sector_data/'$country'_'$i'.geojson' $base'sector_data/'$country'_'$i'.vrt'
 
 
-	# # run PET extract with geojson for each raster
-	python '/var/www/html/aiddata/PET/extract.py' 'vector' $base'sector_data/'$country'_'$i'.geojson' 'project_id' 'longitude' 'latitude' '/var/www/html/aiddata/DET/uploads/globals/processed/agriculture__actual_potential_yield_gap__2000/gap2000_gap_2000_hi_cl.tif' $base'extract_data/'$country'_'$i'_Yield.csv' 'agriculture__actual_potential_yield_gap__2000' 'total_commitments,location_count'
-	python '/var/www/html/aiddata/PET/extract.py' 'vector' $base'sector_data/'$country'_'$i'.geojson' 'project_id' 'longitude' 'latitude' '/var/www/html/aiddata/DET/uploads/globals/processed/socioeconomics__local_economic_activity__1995/nord_gcgpp05.tif' $base'extract_data/'$country'_'$i'_Income.csv' 'socioeconomics__local_economic_activity__1995' 'total_commitments,location_count'
-	python '/var/www/html/aiddata/PET/extract.py' 'vector' $base'sector_data/'$country'_'$i'.geojson' 'project_id' 'longitude' 'latitude' '/var/www/html/aiddata/DET/uploads/globals/processed/socioeconomics__urban_areas__1995/glurextents.asc' $base'extract_data/'$country'_'$i'_Urban.csv' 'socioeconomics__urban_areas__1995' 'total_commitments,location_count'
+	# ////////////////////
 
-	# # join results to $base'extract_data/'$country'_'$i'.csv'
-	/usr/bin/php5 $base'joinExtract.php' $country $i
+	# merge below into single script to read builder json, do extracts and join
+	python /var/www/html/aiddata/data/form/buildExtract.py $country $i
+
+	# # # run PET extract with geojson for each raster
+	# python '/var/www/html/aiddata/PET/extract.py' 'vector' $base'sector_data/'$country'_'$i'.geojson' 'project_id' 'longitude' 'latitude' '/var/www/html/aiddata/DET/uploads/globals/processed/agriculture__actual_potential_yield_gap__2000/gap2000_gap_2000_hi_cl.tif' $base'extract_data/'$country'_'$i'_Yield.csv' 'agriculture__actual_potential_yield_gap__2000' 'total_commitments,location_count'
+	# python '/var/www/html/aiddata/PET/extract.py' 'vector' $base'sector_data/'$country'_'$i'.geojson' 'project_id' 'longitude' 'latitude' '/var/www/html/aiddata/DET/uploads/globals/processed/socioeconomics__local_economic_activity__1995/nord_gcgpp05.tif' $base'extract_data/'$country'_'$i'_Income.csv' 'socioeconomics__local_economic_activity__1995' 'total_commitments,location_count'
+	# python '/var/www/html/aiddata/PET/extract.py' 'vector' $base'sector_data/'$country'_'$i'.geojson' 'project_id' 'longitude' 'latitude' '/var/www/html/aiddata/DET/uploads/globals/processed/socioeconomics__urban_areas__1995/glurextents.asc' $base'extract_data/'$country'_'$i'_Urban.csv' 'socioeconomics__urban_areas__1995' 'total_commitments,location_count'
+
+	# # # join results to $base'extract_data/'$country'_'$i'.csv'
+	# /usr/bin/php5 $base'joinExtract.php' $country $i
+
+	# \\\\\\\\\\\\\\\\\\\\
+
 
 	# check if country / sector is in buildJSON
 	# replace if it exists
