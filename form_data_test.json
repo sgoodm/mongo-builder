@@ -1,0 +1,476 @@
+{
+    "Global": {
+        "Agriculture": {
+            "per_Low-Income": 43.86, 
+            "per_Low-Yield": 79.72, 
+            "per_Urban-Area": 12.86, 
+            "projects": 2941.0, 
+            "tot_Low-Income": 870028783.99, 
+            "tot_Low-Yield": 1581524640.02, 
+            "tot_Urban-Area": 255190129.42, 
+            "total": 1983757312.23, 
+            "type": "Agriculture"
+        }, 
+        "Education": {
+            "per_Low-Income": 28.67, 
+            "per_Low-Yield": 91.54, 
+            "per_Urban-Area": 16.01, 
+            "projects": 6000.0, 
+            "tot_Low-Income": 706459300.41, 
+            "tot_Low-Yield": 2255355091.3, 
+            "tot_Urban-Area": 394529409.61, 
+            "total": 2463810785.51, 
+            "type": "Education"
+        }, 
+        "Health": {
+            "per_Low-Income": 18.9, 
+            "per_Low-Yield": 93.13, 
+            "per_Urban-Area": 9.63, 
+            "projects": 8096.0, 
+            "tot_Low-Income": 719622820.33, 
+            "tot_Low-Yield": 3545349619.17, 
+            "tot_Urban-Area": 366731013.96, 
+            "total": 3806727854.9, 
+            "type": "Health"
+        }, 
+        "Industry": {
+            "per_Low-Income": 32.54, 
+            "per_Low-Yield": 86.09, 
+            "per_Urban-Area": 36.86, 
+            "projects": 1121.0, 
+            "tot_Low-Income": 133736214.01, 
+            "tot_Low-Yield": 353773878.32, 
+            "tot_Urban-Area": 151457924.2, 
+            "total": 410928659.07, 
+            "type": "Industry"
+        }, 
+        "Other": {
+            "per_Low-Income": 23.47, 
+            "per_Low-Yield": 85.34, 
+            "per_Urban-Area": 20.98, 
+            "projects": 9890.0, 
+            "tot_Low-Income": 4445953559.07, 
+            "tot_Low-Yield": 16164229457.83, 
+            "tot_Urban-Area": 3973735882.99, 
+            "total": 18940064269.3, 
+            "type": "Other"
+        }, 
+        "Total": {
+            "per_Low-Income": 26.68, 
+            "per_Low-Yield": 86.03, 
+            "per_Urban-Area": 19.99, 
+            "projects": 30233.0, 
+            "tot_Low-Income": 7875998844.17, 
+            "tot_Low-Yield": 25396247014.58, 
+            "tot_Urban-Area": 5902558009.32, 
+            "total": 29520538089.88, 
+            "type": "Total"
+        }, 
+        "Water": {
+            "per_Low-Income": 52.22, 
+            "per_Low-Yield": 78.11, 
+            "per_Urban-Area": 39.73, 
+            "projects": 2185.0, 
+            "tot_Low-Income": 1000198166.36, 
+            "tot_Low-Yield": 1496014327.94, 
+            "tot_Urban-Area": 760913649.14, 
+            "total": 1915249208.87, 
+            "type": "Water"
+        }
+    }, 
+    "Malawi": {
+        "Agriculture": {
+            "per_Low-Income": 23.23, 
+            "per_Low-Yield": 75.76, 
+            "per_Urban-Area": 5.53, 
+            "projects": 431.0, 
+            "tot_Low-Income": 116293251.3, 
+            "tot_Low-Yield": 379315101.18, 
+            "tot_Urban-Area": 27689438.95, 
+            "total": 500696089.99, 
+            "type": "Agriculture"
+        }, 
+        "Education": {
+            "per_Low-Income": 23.75, 
+            "per_Low-Yield": 75.67, 
+            "per_Urban-Area": 11.49, 
+            "projects": 172.0, 
+            "tot_Low-Income": 112446119.99, 
+            "tot_Low-Yield": 358237063.77, 
+            "tot_Urban-Area": 54398324.24, 
+            "total": 473421053.07, 
+            "type": "Education"
+        }, 
+        "Health": {
+            "per_Low-Income": 9.86, 
+            "per_Low-Yield": 92.21, 
+            "per_Urban-Area": 4.08, 
+            "projects": 455.0, 
+            "tot_Low-Income": 148409004.16, 
+            "tot_Low-Yield": 1387768603.79, 
+            "tot_Urban-Area": 61352057.0, 
+            "total": 1505069109.06, 
+            "type": "Health"
+        }, 
+        "Industry": {
+            "per_Low-Income": 0.28, 
+            "per_Low-Yield": 100.0, 
+            "per_Urban-Area": 0.0, 
+            "projects": 22.0, 
+            "tot_Low-Income": 200000.0, 
+            "tot_Low-Yield": 72497658.86, 
+            "tot_Urban-Area": 0.0, 
+            "total": 72497658.86, 
+            "type": "Industry"
+        }, 
+        "Other": {
+            "per_Low-Income": 28.47, 
+            "per_Low-Yield": 74.09, 
+            "per_Urban-Area": 21.54, 
+            "projects": 1273.0, 
+            "tot_Low-Income": 663338471.55, 
+            "tot_Low-Yield": 1726059980.74, 
+            "tot_Urban-Area": 501709217.82, 
+            "total": 2329734101.76, 
+            "type": "Other"
+        }, 
+        "Total": {
+            "per_Low-Income": 24.65, 
+            "per_Low-Yield": 76.62, 
+            "per_Urban-Area": 14.76, 
+            "projects": 2523.0, 
+            "tot_Low-Income": 1306171169.04, 
+            "tot_Low-Yield": 4059094368.81, 
+            "tot_Urban-Area": 782067829.82, 
+            "total": 5297994129.79, 
+            "type": "Total"
+        }, 
+        "Water": {
+            "per_Low-Income": 63.73, 
+            "per_Low-Yield": 32.46, 
+            "per_Urban-Area": 32.87, 
+            "projects": 170.0, 
+            "tot_Low-Income": 265484322.04, 
+            "tot_Low-Yield": 135215960.47, 
+            "tot_Urban-Area": 136918791.81, 
+            "total": 416576117.05, 
+            "type": "Water"
+        }
+    }, 
+    "Nepal": {
+        "Agriculture": {
+            "per_Low-Income": 40.09, 
+            "per_Low-Yield": 98.89, 
+            "per_Urban-Area": 13.09, 
+            "projects": 1486.0, 
+            "tot_Low-Income": 172496900.82, 
+            "tot_Low-Yield": 425466066.31, 
+            "tot_Urban-Area": 56308633.06, 
+            "total": 430238753.58, 
+            "type": "Agriculture"
+        }, 
+        "Education": {
+            "per_Low-Income": 23.77, 
+            "per_Low-Yield": 97.66, 
+            "per_Urban-Area": 7.9, 
+            "projects": 4752.0, 
+            "tot_Low-Income": 231577367.72, 
+            "tot_Low-Yield": 951558129.48, 
+            "tot_Urban-Area": 76941400.11, 
+            "total": 974399421.08, 
+            "type": "Education"
+        }, 
+        "Health": {
+            "per_Low-Income": 20.23, 
+            "per_Low-Yield": 98.44, 
+            "per_Urban-Area": 8.34, 
+            "projects": 6261.0, 
+            "tot_Low-Income": 169553318.19, 
+            "tot_Low-Yield": 824987201.73, 
+            "tot_Urban-Area": 69884552.44, 
+            "total": 838087896.26, 
+            "type": "Health"
+        }, 
+        "Industry": {
+            "per_Low-Income": 44.76, 
+            "per_Low-Yield": 99.47, 
+            "per_Urban-Area": 12.73, 
+            "projects": 1048.0, 
+            "tot_Low-Income": 13957897.88, 
+            "tot_Low-Yield": 31017628.16, 
+            "tot_Urban-Area": 3969740.83, 
+            "total": 31184226.56, 
+            "type": "Industry"
+        }, 
+        "Other": {
+            "per_Low-Income": 20.75, 
+            "per_Low-Yield": 99.61, 
+            "per_Urban-Area": 12.1, 
+            "projects": 5903.0, 
+            "tot_Low-Income": 668717443.59, 
+            "tot_Low-Yield": 3210170902.19, 
+            "tot_Urban-Area": 389908716.64, 
+            "total": 3222786248.39, 
+            "type": "Other"
+        }, 
+        "Total": {
+            "per_Low-Income": 27.37, 
+            "per_Low-Yield": 99.09, 
+            "per_Urban-Area": 13.7, 
+            "projects": 21000.0, 
+            "tot_Low-Income": 1654688119.14, 
+            "tot_Low-Yield": 5991113319.37, 
+            "tot_Urban-Area": 828477542.06, 
+            "total": 6046021923.79, 
+            "type": "Total"
+        }, 
+        "Water": {
+            "per_Low-Income": 72.52, 
+            "per_Low-Yield": 99.74, 
+            "per_Urban-Area": 42.14, 
+            "projects": 1550.0, 
+            "tot_Low-Income": 398385190.94, 
+            "tot_Low-Yield": 547913391.5, 
+            "tot_Urban-Area": 231464498.98, 
+            "total": 549325377.92, 
+            "type": "Water"
+        }
+    }, 
+    "Senegal": {
+        "Agriculture": {
+            "per_Low-Income": 64.79, 
+            "per_Low-Yield": 74.23, 
+            "per_Urban-Area": 14.66, 
+            "projects": 114.0, 
+            "tot_Low-Income": 371079538.71, 
+            "tot_Low-Yield": 425161624.21, 
+            "tot_Urban-Area": 83961599.76, 
+            "total": 572781240.8, 
+            "type": "Agriculture"
+        }, 
+        "Education": {
+            "per_Low-Income": 41.4, 
+            "per_Low-Yield": 83.15, 
+            "per_Urban-Area": 49.54, 
+            "projects": 123.0, 
+            "tot_Low-Income": 105119203.94, 
+            "tot_Low-Yield": 211124514.0, 
+            "tot_Urban-Area": 125786255.03, 
+            "total": 253905657.72, 
+            "type": "Education"
+        }, 
+        "Health": {
+            "per_Low-Income": 22.2, 
+            "per_Low-Yield": 89.58, 
+            "per_Urban-Area": 26.82, 
+            "projects": 108.0, 
+            "tot_Low-Income": 158637029.88, 
+            "tot_Low-Yield": 640161853.06, 
+            "tot_Urban-Area": 191637847.73, 
+            "total": 714664740.88, 
+            "type": "Health"
+        }, 
+        "Industry": {
+            "per_Low-Income": 41.0, 
+            "per_Low-Yield": 84.51, 
+            "per_Urban-Area": 50.54, 
+            "projects": 25.0, 
+            "tot_Low-Income": 97657099.4, 
+            "tot_Low-Yield": 201312267.93, 
+            "tot_Urban-Area": 120395308.62, 
+            "total": 238208862.85, 
+            "type": "Industry"
+        }, 
+        "Other": {
+            "per_Low-Income": 26.09, 
+            "per_Low-Yield": 61.15, 
+            "per_Urban-Area": 44.38, 
+            "projects": 361.0, 
+            "tot_Low-Income": 1314050672.62, 
+            "tot_Low-Yield": 3079590583.39, 
+            "tot_Urban-Area": 2234721536.78, 
+            "total": 5035895755.44, 
+            "type": "Other"
+        }, 
+        "Total": {
+            "per_Low-Income": 29.29, 
+            "per_Low-Yield": 67.42, 
+            "per_Urban-Area": 39.72, 
+            "projects": 781.0, 
+            "tot_Low-Income": 2062219373.18, 
+            "tot_Low-Yield": 4746879064.81, 
+            "tot_Urban-Area": 2796144699.12, 
+            "total": 7040320671.36, 
+            "type": "Total"
+        }, 
+        "Water": {
+            "per_Low-Income": 6.97, 
+            "per_Low-Yield": 84.29, 
+            "per_Urban-Area": 17.63, 
+            "projects": 50.0, 
+            "tot_Low-Income": 15675828.63, 
+            "tot_Low-Yield": 189528222.22, 
+            "tot_Urban-Area": 39642151.2, 
+            "total": 224864413.67, 
+            "type": "Water"
+        }
+    }, 
+    "Timor-Leste": {
+        "Agriculture": {
+            "per_Low-Income": 99.69, 
+            "per_Low-Yield": 62.22, 
+            "per_Urban-Area": 1.24, 
+            "projects": 707.0, 
+            "tot_Low-Income": 145040049.8, 
+            "tot_Low-Yield": 90518639.79, 
+            "tot_Urban-Area": 1808339.44, 
+            "total": 145485219.17, 
+            "type": "Agriculture"
+        }, 
+        "Education": {
+            "per_Low-Income": 99.94, 
+            "per_Low-Yield": 88.17, 
+            "per_Urban-Area": 16.09, 
+            "projects": 663.0, 
+            "tot_Low-Income": 206564711.37, 
+            "tot_Low-Yield": 182225756.88, 
+            "tot_Urban-Area": 33257866.56, 
+            "total": 206679804.87, 
+            "type": "Education"
+        }, 
+        "Health": {
+            "per_Low-Income": 100.0, 
+            "per_Low-Yield": 80.47, 
+            "per_Urban-Area": 4.48, 
+            "projects": 727.0, 
+            "tot_Low-Income": 158052109.63, 
+            "tot_Low-Yield": 127181419.93, 
+            "tot_Urban-Area": 7076784.42, 
+            "total": 158052109.63, 
+            "type": "Health"
+        }, 
+        "Industry": {
+            "per_Low-Income": 100.0, 
+            "per_Low-Yield": 93.37, 
+            "per_Urban-Area": 0.0, 
+            "projects": 9.0, 
+            "tot_Low-Income": 1022911.99, 
+            "tot_Low-Yield": 955143.87, 
+            "tot_Urban-Area": 0.0, 
+            "total": 1022911.99, 
+            "type": "Industry"
+        }, 
+        "Other": {
+            "per_Low-Income": 99.7, 
+            "per_Low-Yield": 84.81, 
+            "per_Urban-Area": 9.06, 
+            "projects": 1192.0, 
+            "tot_Low-Income": 995927331.89, 
+            "tot_Low-Yield": 847200203.78, 
+            "tot_Urban-Area": 90524115.79, 
+            "total": 998923007.85, 
+            "type": "Other"
+        }, 
+        "Total": {
+            "per_Low-Income": 99.77, 
+            "per_Low-Yield": 82.74, 
+            "per_Urban-Area": 9.13, 
+            "projects": 3433.0, 
+            "tot_Low-Income": 1574711931.07, 
+            "tot_Low-Yield": 1305809881.36, 
+            "tot_Urban-Area": 144082143.91, 
+            "total": 1578267869.9, 
+            "type": "Total"
+        }, 
+        "Water": {
+            "per_Low-Income": 100.0, 
+            "per_Low-Yield": 84.76, 
+            "per_Urban-Area": 16.76, 
+            "projects": 135.0, 
+            "tot_Low-Income": 68104816.39, 
+            "tot_Low-Yield": 57728717.11, 
+            "tot_Urban-Area": 11415037.7, 
+            "total": 68104816.39, 
+            "type": "Water"
+        }
+    }, 
+    "Uganda": {
+        "Agriculture": {
+            "per_Low-Income": 19.46, 
+            "per_Low-Yield": 78.03, 
+            "per_Urban-Area": 25.53, 
+            "projects": 203.0, 
+            "tot_Low-Income": 65119043.36, 
+            "tot_Low-Yield": 261063208.53, 
+            "tot_Urban-Area": 85422118.21, 
+            "total": 334556008.69, 
+            "type": "Agriculture"
+        }, 
+        "Education": {
+            "per_Low-Income": 9.14, 
+            "per_Low-Yield": 99.42, 
+            "per_Urban-Area": 18.75, 
+            "projects": 290.0, 
+            "tot_Low-Income": 50751897.39, 
+            "tot_Low-Yield": 552209627.17, 
+            "tot_Urban-Area": 104145563.67, 
+            "total": 555404848.77, 
+            "type": "Education"
+        }, 
+        "Health": {
+            "per_Low-Income": 14.38, 
+            "per_Low-Yield": 95.67, 
+            "per_Urban-Area": 6.22, 
+            "projects": 545.0, 
+            "tot_Low-Income": 84971358.47, 
+            "tot_Low-Yield": 565250540.66, 
+            "tot_Urban-Area": 36779772.37, 
+            "total": 590853999.07, 
+            "type": "Health"
+        }, 
+        "Industry": {
+            "per_Low-Income": 30.73, 
+            "per_Low-Yield": 70.56, 
+            "per_Urban-Area": 39.83, 
+            "projects": 17.0, 
+            "tot_Low-Income": 20898304.74, 
+            "tot_Low-Yield": 47991179.5, 
+            "tot_Urban-Area": 27092874.75, 
+            "total": 68014998.81, 
+            "type": "Industry"
+        }, 
+        "Other": {
+            "per_Low-Income": 10.93, 
+            "per_Low-Yield": 99.3, 
+            "per_Urban-Area": 10.29, 
+            "projects": 1161.0, 
+            "tot_Low-Income": 803919639.42, 
+            "tot_Low-Yield": 7301207787.73, 
+            "tot_Urban-Area": 756872295.96, 
+            "total": 7352725155.86, 
+            "type": "Other"
+        }, 
+        "Total": {
+            "per_Low-Income": 13.37, 
+            "per_Low-Yield": 97.23, 
+            "per_Urban-Area": 14.14, 
+            "projects": 2496.0, 
+            "tot_Low-Income": 1278208251.74, 
+            "tot_Low-Yield": 9293350380.23, 
+            "tot_Urban-Area": 1351785794.41, 
+            "total": 9557933495.04, 
+            "type": "Total"
+        }, 
+        "Water": {
+            "per_Low-Income": 38.48, 
+            "per_Low-Yield": 86.17, 
+            "per_Urban-Area": 52.02, 
+            "projects": 280.0, 
+            "tot_Low-Income": 252548008.36, 
+            "tot_Low-Yield": 565628036.64, 
+            "tot_Urban-Area": 341473169.45, 
+            "total": 656378483.84, 
+            "type": "Water"
+        }
+    }
+}

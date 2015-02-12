@@ -27,7 +27,7 @@ json_full = json.load(json_handle)
 new_country = False
 if not json_full['country_data'][country]:
 	new_country = True
-	json_full['country_data']['TEST'] = {"info": [1,1], "line":[1,1], "continent":"", "type":"new"}
+	json_full['country_data'][country] = {"info": [1,1], "line":[1,1], "continent":"", "type":"new"}
 
 myInclude = "transaction_sum,location_count"
 if json_full['country_data'][country]['type'] == "old":

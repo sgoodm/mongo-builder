@@ -35,7 +35,7 @@
                 1.99
             ], 
             "type": "new"
-        },
+        }, 
         "Timor-Leste": {
             "continent": "Asia", 
             "info": [
@@ -65,29 +65,32 @@
         {
             "file": "gap2000_gap_2000_hi_cl.tif", 
             "folder": "agriculture__actual_potential_yield_gap__2000", 
+            "form": "low yield areas", 
             "name": "Low-Yield", 
-            "form": "low yield areas",
             "stats": {
-                "thresh": 0, 
+                "op": "lte", 
+                "thresh": 0.0, 
                 "type": "variable"
             }
         }, 
         {
             "file": "nord_gcgpp05.tif", 
             "folder": "socioeconomics__local_economic_activity__1995", 
+            "form": "low income areas", 
             "name": "Low-Income", 
-            "form": "low income areas",
             "stats": {
-                "thresh": 0, 
+                "op": "lte", 
+                "thresh": 647.76196289100005, 
                 "type": "variable"
             }
         }, 
         {
             "file": "glurextents.asc", 
             "folder": "socioeconomics__urban_areas__1995", 
-            "name": "Urban-Area", 
             "form": "urban areas", 
+            "name": "Urban-Area", 
             "stats": {
+                "op": "eq", 
                 "thresh": 2, 
                 "type": "fixed"
             }
