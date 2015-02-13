@@ -3,60 +3,60 @@
         "Malawi": {
             "continent": "Africa", 
             "info": [
-                1.65, 
-                1.15
+                0.606, 
+                0.869
             ], 
             "line": [
-                1.67, 
-                1.43
+                0.599, 
+                0.699
             ], 
             "type": "old"
         }, 
         "Nepal": {
             "continent": "Asia", 
             "info": [
-                1.3, 
-                3.5
+                0.769, 
+                0.285
             ], 
             "line": [
-                1.36, 
-                2.35
+                0.745, 
+                0.426
             ], 
             "type": "old"
         }, 
         "Senegal": {
             "continent": "Africa", 
             "info": [
-                2.6, 
-                2.6
+                0.385, 
+                0.385
             ], 
             "line": [
-                2.2, 
-                1.99
+                0.454, 
+                0.503
             ], 
             "type": "new"
-        },
+        }, 
         "Timor-Leste": {
             "continent": "Asia", 
             "info": [
-                1.35, 
-                1.4
+                0.741, 
+                0.714
             ], 
             "line": [
-                1.175, 
-                1.52
+                0.851, 
+                0.658
             ], 
             "type": "new"
         }, 
         "Uganda": {
             "continent": "Africa", 
             "info": [
-                1.5, 
-                1.9
+                0.667, 
+                0.526
             ], 
             "line": [
-                1.67, 
-                1.69
+                0.599, 
+                0.592
             ], 
             "type": "old"
         }
@@ -65,29 +65,32 @@
         {
             "file": "gap2000_gap_2000_hi_cl.tif", 
             "folder": "agriculture__actual_potential_yield_gap__2000", 
+            "form": "low yield areas", 
             "name": "Low-Yield", 
-            "form": "low yield areas",
             "stats": {
-                "thresh": 0, 
+                "op": "lte", 
+                "thresh": 0.0, 
                 "type": "variable"
             }
         }, 
         {
-            "file": "nord_gcgpp05.tif", 
-            "folder": "socioeconomics__local_economic_activity__1995", 
-            "name": "Low-Income", 
-            "form": "low income areas",
+            "file": "uw.asc", 
+            "folder": "socioeconomics__child_malnutrition__2002", 
+            "form": "areas with high child malnutrition", 
+            "name": "High-Child-Malnutrition", 
             "stats": {
-                "thresh": 0, 
-                "type": "variable"
+                "op": "gte", 
+                "thresh": 300.0, 
+                "type": "fixed"
             }
         }, 
         {
             "file": "glurextents.asc", 
             "folder": "socioeconomics__urban_areas__1995", 
-            "name": "Urban-Area", 
             "form": "urban areas", 
+            "name": "Urban-Area", 
             "stats": {
+                "op": "eq", 
                 "thresh": 2, 
                 "type": "fixed"
             }

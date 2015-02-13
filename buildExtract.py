@@ -42,7 +42,7 @@ for field in range(0, len(includes)):
 
 full_header = header
 for item in json_full['raster_data']:
-	full_header += "," + item['name']
+	full_header += "," + item['folder']
 
 # for each raster_data item run extractions and build csv
 count = len(json_full['raster_data'])
@@ -55,7 +55,7 @@ for i in range(0, count):
 	rfile =  json_full['raster_data'][i]['file']
 
 	myRaster = '/var/www/html/aiddata/DET/uploads/globals/processed/'+rfolder+'/'+rfile
-	myOutput = base+'extract_data/'+country+'_'+sector+'_'+rname+'_test.csv'
+	myOutput = base+'extract_data/'+country+'_'+sector+'_'+rname+'.csv'
 
 	# load raster
 	src_filename = myRaster
@@ -66,7 +66,7 @@ for i in range(0, count):
 	# open output for this raster extract
 	with open(myOutput, 'w') as f:
 
-		f.write(header + "," + rname + "\n")
+		f.write(header + "," + rfolder + "\n")
 
 		shp_filename = myData
 		ds=ogr.Open(shp_filename)

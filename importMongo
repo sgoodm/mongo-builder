@@ -17,11 +17,14 @@
 # --------------------------------------------------------------------------
 # 
 # 	TODO
-# 		- merge with presenegal builder and add pre-senegal format as an optional input flag)
+# 		- merge with presenegal builder and add pre-senegal format as an optional input flag
 # 		- add optional input flags / options to just run parts of script (ie: dont reload mongo, dont do extractions, just rerun calc.py)
 # 		- improve validation and file checking
+# 		- add log (each time it is run, events, time to run, etc.)
 # 
 # --------------------------------------------------------------------------
+
+T="$(date +%s)"
 
 country=$1
 
@@ -67,7 +70,7 @@ then
 
 	do
 
-		# # create csv using new mongo db/collection and build vrt
+		# create csv using new mongo db/collection and build vrt
 		/usr/bin/php5 $base'buildCSV.php' $country $start $end $i
 
 		# remove geojson if it exists (ogr will not overwrite)
@@ -79,22 +82,8 @@ then
 		# create geojson using vrt
 		ogr2ogr -f GeoJSON $base'sector_data/'$country'_'$i'.geojson' $base'sector_data/'$country'_'$i'.vrt'
 
-
-		# ////////////////////
-
-		# merge below into single script to read builder json, do extracts and join
+		# run extracts and join based on builder_data.json contents
 		python /var/www/html/aiddata/data/form/buildExtract.py $country $i
-
-		# # run PET extract with geojson for each raster
-		# python '/var/www/html/aiddata/PET/extract.py' 'vector' $base'sector_data/'$country'_'$i'.geojson' 'project_id' 'longitude' 'latitude' '/var/www/html/aiddata/DET/uploads/globals/processed/agriculture__actual_potential_yield_gap__2000/gap2000_gap_2000_hi_cl.tif' $base'extract_data/'$country'_'$i'_Yield.csv' 'agriculture__actual_potential_yield_gap__2000' 'transaction_sum,location_count'
-		# python '/var/www/html/aiddata/PET/extract.py' 'vector' $base'sector_data/'$country'_'$i'.geojson' 'project_id' 'longitude' 'latitude' '/var/www/html/aiddata/DET/uploads/globals/processed/socioeconomics__local_economic_activity__1995/nord_gcgpp05.tif' $base'extract_data/'$country'_'$i'_Income.csv' 'socioeconomics__local_economic_activity__1995' 'transaction_sum,location_count'
-		# python '/var/www/html/aiddata/PET/extract.py' 'vector' $base'sector_data/'$country'_'$i'.geojson' 'project_id' 'longitude' 'latitude' '/var/www/html/aiddata/DET/uploads/globals/processed/socioeconomics__urban_areas__1995/glurextents.asc' $base'extract_data/'$country'_'$i'_Urban.csv' 'socioeconomics__urban_areas__1995' 'transaction_sum,location_count'
-
-		# # join results to $base'extract_data/'$country'_'$i'.csv'
-		# /usr/bin/php5 $base'joinExtract.php' $country $i
-
-		# \\\\\\\\\\\\\\\\\\\\
-
 
 		# check if country / sector is in buildJSON
 		# replace if it exists
@@ -116,15 +105,19 @@ then
 
 		fi
 
-	done
+		echo $country' '$i' finished'
 
+	done
 
 	bash $base'buildJSON'
 
-	echo 'done'
+	echo 'runMongo_presenegal done:'
+
+	T="$(($(date +%s)-T))"
+	echo "Runtime: $((T/60)):$((T%60))"
 
 else
 	
-	echo 'error'
+	echo 'runMongo_presenegal error'
 
 fi

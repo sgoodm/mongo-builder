@@ -12,6 +12,8 @@
 # example use:
 # bash /var/www/html/aiddata/data/form/runMongo_presenegal Nepal
 
+T="$(date +%s)"
+
 country=$1
 
 sectors=('Agriculture' 'Education' 'Health' 'Industry' 'Water' 'Other')
@@ -22,34 +24,20 @@ for i in "${sectors[@]}"
 
 do
 
-	# # create csv using new mongo db/collection and build vrt
+	# create csv using new mongo db/collection and build vrt
 	/usr/bin/php5 $base'buildCSV_presenegal.php' $country $i
 
-	# # remove geojson if it exists (ogr will not overwrite)
+	# remove geojson if it exists (ogr will not overwrite)
 	if [[ -e $base'sector_data/'$country'_'$i'.geojson' ]]
 		then
 			rm $base'sector_data/'$country'_'$i'.geojson'
 	fi
 
-	# # create geojson using vrt
+	# create geojson using vrt
 	ogr2ogr -f GeoJSON $base'sector_data/'$country'_'$i'.geojson' $base'sector_data/'$country'_'$i'.vrt'
 
-
-	# ////////////////////
-
-	# merge below into single script to read builder json, do extracts and join
+	# run extracts and join based on builder_data.json contents
 	python /var/www/html/aiddata/data/form/buildExtract.py $country $i
-
-	# # # run PET extract with geojson for each raster
-	# python '/var/www/html/aiddata/PET/extract.py' 'vector' $base'sector_data/'$country'_'$i'.geojson' 'project_id' 'longitude' 'latitude' '/var/www/html/aiddata/DET/uploads/globals/processed/agriculture__actual_potential_yield_gap__2000/gap2000_gap_2000_hi_cl.tif' $base'extract_data/'$country'_'$i'_Yield.csv' 'agriculture__actual_potential_yield_gap__2000' 'total_commitments,location_count'
-	# python '/var/www/html/aiddata/PET/extract.py' 'vector' $base'sector_data/'$country'_'$i'.geojson' 'project_id' 'longitude' 'latitude' '/var/www/html/aiddata/DET/uploads/globals/processed/socioeconomics__local_economic_activity__1995/nord_gcgpp05.tif' $base'extract_data/'$country'_'$i'_Income.csv' 'socioeconomics__local_economic_activity__1995' 'total_commitments,location_count'
-	# python '/var/www/html/aiddata/PET/extract.py' 'vector' $base'sector_data/'$country'_'$i'.geojson' 'project_id' 'longitude' 'latitude' '/var/www/html/aiddata/DET/uploads/globals/processed/socioeconomics__urban_areas__1995/glurextents.asc' $base'extract_data/'$country'_'$i'_Urban.csv' 'socioeconomics__urban_areas__1995' 'total_commitments,location_count'
-
-	# # # join results to $base'extract_data/'$country'_'$i'.csv'
-	# /usr/bin/php5 $base'joinExtract.php' $country $i
-
-	# \\\\\\\\\\\\\\\\\\\\
-
 
 	# check if country / sector is in buildJSON
 	# replace if it exists
@@ -71,10 +59,13 @@ do
 
 	fi
 
+	echo $country' '$i' finished'
+
 done
 
-bash $base'buildJSON'
+# bash $base'buildJSON'
 
+echo 'runMongo_presenegal done:'
 
-echo 'done'
-echo -e '\n'
+T="$(($(date +%s)-T))"
+echo "Runtime: $((T/60)):$((T%60))"
