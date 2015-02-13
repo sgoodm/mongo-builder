@@ -40,7 +40,7 @@
             "continent": "Asia", 
             "info": [
                 0.741, 
-                0.810
+                0.81
             ], 
             "line": [
                 0.851, 
@@ -51,8 +51,8 @@
         "Uganda": {
             "continent": "Africa", 
             "info": [
-                0.550, 
-                0.250
+                0.55, 
+                0.25
             ], 
             "line": [
                 0.589, 
@@ -61,12 +61,174 @@
             "type": "old"
         }
     }, 
+    "no_data": {
+        "Malawi": {
+            "Agriculture": {
+                "High-Child-Malnutrition": false, 
+                "Low-Yield": false, 
+                "Urban-Area": false
+            }, 
+            "Education": {
+                "High-Child-Malnutrition": false, 
+                "Low-Yield": false, 
+                "Urban-Area": false
+            }, 
+            "Health": {
+                "High-Child-Malnutrition": false, 
+                "Low-Yield": false, 
+                "Urban-Area": false
+            }, 
+            "Industry": {
+                "High-Child-Malnutrition": false, 
+                "Low-Yield": false, 
+                "Urban-Area": false
+            }, 
+            "Other": {
+                "High-Child-Malnutrition": false, 
+                "Low-Yield": false, 
+                "Urban-Area": false
+            }, 
+            "Water": {
+                "High-Child-Malnutrition": false, 
+                "Low-Yield": false, 
+                "Urban-Area": false
+            }
+        }, 
+        "Nepal": {
+            "Agriculture": {
+                "High-Child-Malnutrition": false, 
+                "Low-Yield": false, 
+                "Urban-Area": false
+            }, 
+            "Education": {
+                "High-Child-Malnutrition": false, 
+                "Low-Yield": false, 
+                "Urban-Area": false
+            }, 
+            "Health": {
+                "High-Child-Malnutrition": false, 
+                "Low-Yield": false, 
+                "Urban-Area": false
+            }, 
+            "Industry": {
+                "High-Child-Malnutrition": false, 
+                "Low-Yield": false, 
+                "Urban-Area": false
+            }, 
+            "Other": {
+                "High-Child-Malnutrition": false, 
+                "Low-Yield": false, 
+                "Urban-Area": false
+            }, 
+            "Water": {
+                "High-Child-Malnutrition": false, 
+                "Low-Yield": false, 
+                "Urban-Area": false
+            }
+        }, 
+        "Senegal": {
+            "Agriculture": {
+                "High-Child-Malnutrition": false, 
+                "Low-Yield": false, 
+                "Urban-Area": false
+            }, 
+            "Education": {
+                "High-Child-Malnutrition": false, 
+                "Low-Yield": false, 
+                "Urban-Area": false
+            }, 
+            "Health": {
+                "High-Child-Malnutrition": false, 
+                "Low-Yield": false, 
+                "Urban-Area": false
+            }, 
+            "Industry": {
+                "High-Child-Malnutrition": false, 
+                "Low-Yield": false, 
+                "Urban-Area": false
+            }, 
+            "Other": {
+                "High-Child-Malnutrition": false, 
+                "Low-Yield": false, 
+                "Urban-Area": false
+            }, 
+            "Water": {
+                "High-Child-Malnutrition": false, 
+                "Low-Yield": false, 
+                "Urban-Area": false
+            }
+        }, 
+        "Timor-Leste": {
+            "Agriculture": {
+                "High-Child-Malnutrition": true, 
+                "Low-Yield": false, 
+                "Urban-Area": false
+            }, 
+            "Education": {
+                "High-Child-Malnutrition": true, 
+                "Low-Yield": false, 
+                "Urban-Area": false
+            }, 
+            "Health": {
+                "High-Child-Malnutrition": true, 
+                "Low-Yield": false, 
+                "Urban-Area": false
+            }, 
+            "Industry": {
+                "High-Child-Malnutrition": true, 
+                "Low-Yield": false, 
+                "Urban-Area": false
+            }, 
+            "Other": {
+                "High-Child-Malnutrition": true, 
+                "Low-Yield": false, 
+                "Urban-Area": false
+            }, 
+            "Water": {
+                "High-Child-Malnutrition": true, 
+                "Low-Yield": false, 
+                "Urban-Area": false
+            }
+        }, 
+        "Uganda": {
+            "Agriculture": {
+                "High-Child-Malnutrition": false, 
+                "Low-Yield": false, 
+                "Urban-Area": false
+            }, 
+            "Education": {
+                "High-Child-Malnutrition": false, 
+                "Low-Yield": false, 
+                "Urban-Area": false
+            }, 
+            "Health": {
+                "High-Child-Malnutrition": false, 
+                "Low-Yield": false, 
+                "Urban-Area": false
+            }, 
+            "Industry": {
+                "High-Child-Malnutrition": false, 
+                "Low-Yield": false, 
+                "Urban-Area": false
+            }, 
+            "Other": {
+                "High-Child-Malnutrition": false, 
+                "Low-Yield": false, 
+                "Urban-Area": false
+            }, 
+            "Water": {
+                "High-Child-Malnutrition": false, 
+                "Low-Yield": false, 
+                "Urban-Area": false
+            }
+        }
+    }, 
     "raster_data": [
         {
             "file": "gap2000_gap_2000_hi_cl.tif", 
             "folder": "agriculture__actual_potential_yield_gap__2000", 
             "form": "low yield areas", 
-            "name": "Low-Yield",
+            "name": "Low-Yield", 
             "nodata": 247, 
             "stats": {
                 "op": "lte", 
@@ -79,7 +241,7 @@
             "folder": "socioeconomics__child_malnutrition__2002", 
             "form": "areas with high child malnutrition", 
             "name": "High-Child-Malnutrition", 
-            "nodata": -9999,
+            "nodata": -9999, 
             "stats": {
                 "op": "gte", 
                 "thresh": 300.0, 
@@ -90,7 +252,7 @@
             "file": "glurextents.asc", 
             "folder": "socioeconomics__urban_areas__1995", 
             "form": "urban areas", 
-            "name": "Urban-Area",
+            "name": "Urban-Area", 
             "nodata": -9999, 
             "stats": {
                 "op": "eq", 
