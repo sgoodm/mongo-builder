@@ -66,7 +66,8 @@
             "file": "gap2000_gap_2000_hi_cl.tif", 
             "folder": "agriculture__actual_potential_yield_gap__2000", 
             "form": "low yield areas", 
-            "name": "Low-Yield", 
+            "name": "Low-Yield",
+            "nodata": -9999, 
             "stats": {
                 "op": "lte", 
                 "thresh": 0.0, 
@@ -78,6 +79,7 @@
             "folder": "socioeconomics__child_malnutrition__2002", 
             "form": "areas with high child malnutrition", 
             "name": "High-Child-Malnutrition", 
+            "nodata": -9999,
             "stats": {
                 "op": "gte", 
                 "thresh": 300.0, 
@@ -88,7 +90,8 @@
             "file": "glurextents.asc", 
             "folder": "socioeconomics__urban_areas__1995", 
             "form": "urban areas", 
-            "name": "Urban-Area", 
+            "name": "Urban-Area",
+            "nodata": -9999, 
             "stats": {
                 "op": "eq", 
                 "thresh": 2, 

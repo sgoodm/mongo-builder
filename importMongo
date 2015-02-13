@@ -1,123 +1,172 @@
 #!/bin/bash
-
+# 
 # for use with Senegal format research releases
-
+# 	- takes country name as input
+# 	- must match folder name the release is located in
+# 	- folder must container projects.tsv, transactions.tsv and locations.tsv
+# 
+# 	- example use: bash /var/www/html/aiddata/data/form/importMongo Senegal
+# 
+# 
 # adds a "location_count" field to the locations.tsv file of research release
 # merges a research release tables into a MongoDB ready import and creates new Mongo database and collection
-# MongoDB database is the name of the country (as specified by user input)
-# MongoDB collection is "complete"
-
-# takes country name as input
-# must match folder name the release is located in
-# folder must container projects.tsv, transactions.tsv and locations.tsv
-
-# example use:
-# bash /var/www/html/aiddata/data/form/importMongo Senegal
-
+# 	- MongoDB database is the name of the country (as specified by user input)
+# 	- MongoDB collection is "complete"
+# 
+# for each sector:
+# 	- builds csv from mongo
+# 	- creates geojson
+# 	- extracts data from rasters designated in builder_data.json
+# 	- updates and runs buildJSON script to update form_data.json
+# 
+# 
 # --------------------------------------------------------------------------
 # 
 # 	TODO
 # 		- merge with presenegal builder and add pre-senegal format as an optional input flag
+# 		- merge buildCSV scripts
 # 		- add optional input flags / options to just run parts of script (ie: dont reload mongo, dont do extractions, just rerun calc.py)
 # 		- improve validation and file checking
+# 		- add/improve status updates
 # 		- add log (each time it is run, events, time to run, etc.)
+# 		- use temp folder until everything has completed successfully
+# 
 # 
 # --------------------------------------------------------------------------
 
 T="$(date +%s)"
 
-country=$1
-
-sectors=('Agriculture' 'Education' 'Health' 'Industry' 'Water' 'Other')
+base='/var/www/html/aiddata/data/form/'
 
 start='2005'
 end='2014'
+sectors=('Agriculture' 'Education' 'Health' 'Industry' 'Water' 'Other')
 
-base='/var/www/html/aiddata/data/form/'
+country=""
+old="FALSE"
+while getopts "hpc:" opt
 
-# make sure all files exists
-if [[ -e $base'active/'$country && -e $base'active/'$country'/projects.tsv' && -e $base'active/'$country'/transactions.tsv' && -e $base'active/'$country'/locations.tsv' ]]
+do
+	case "${opt}" in
+	    h)        
+            echo " "
+            echo "options:"
+            echo "-h                	show help"
+            echo "-c [COUNTRY]       	specify the country to run the script for [required]"
+            echo "-p       				identify country as pre-senegal format"
+                        
+			echo 
+			;;
+	    c) country=${OPTARG} ;;
+		p) old="TRUE" ;;
+	    *) echo "Unexpected option ${opt}"; exit ;;
+  	esac
+
+done
+
+if [[ $country == "" ]]
+then 
+	echo "A country input is required."
+	exit 1
+fi
+
+if [[ old == "FALSE" ]]
 
 then
-	
 
-	# -----
-	# if [[ -e $base'active/'$country'/locations_update.tsv']]
-	# 	then
-	# 		read -p "locations_update.tsv already exists for this country. Are you sure you want to continue? " -r
-	# 		if [[ ! $REPLY =~ ^[Yy]$ ]]
-	# 			then
-	# 			    exit 1
-	# 		fi
-	# fi
-	# -----
+	# make sure all files exists
+	if [[ -e $base'active/'$country && -e $base'active/'$country'/projects.tsv' && -e $base'active/'$country'/transactions.tsv' && -e $base'active/'$country'/locations.tsv' ]]
 
+	then
+		
 
-	# create copy of locations file to use for processing
-	mv $base'active/'$country'/locations.tsv' $base'active/'$country'/locations_update.tsv'
-
-	# update new locations file with location_count field
-	python $base'locationCount.py' $base'active/'$country'/locations.tsv' $base'active/'$country'/locations_update.tsv'
-
-	# build mongo ready JSON-like file
-	python $base'buildMongo.py' $base'active/'$country
-
-	# import into new mongo db/collection
-	mongoimport --drop --db $country --collection complete --type json --file $base'active/'$country'/complete.json'
+		# -----
+		# if [[ -e $base'active/'$country'/locations_update.tsv']]
+		# 	then
+		# 		read -p "locations_update.tsv already exists for this country. Are you sure you want to continue? " -r
+		# 		if [[ ! $REPLY =~ ^[Yy]$ ]]
+		# 			then
+		# 			    exit 1
+		# 		fi
+		# fi
+		# -----
 
 
-	for i in "${sectors[@]}"
+		# create copy of locations file to use for processing
+		mv $base'active/'$country'/locations.tsv' $base'active/'$country'/locations_update.tsv'
 
-	do
+		# update new locations file with location_count field
+		python $base'locationCount.py' $base'active/'$country'/locations.tsv' $base'active/'$country'/locations_update.tsv'
 
+		# build mongo ready JSON-like file
+		python $base'buildMongo.py' $base'active/'$country
+
+		# import into new mongo db/collection
+		mongoimport --drop --db $country --collection complete --type json --file $base'active/'$country'/complete.json'
+
+	else
+
+		echo "Required files not found"
+		exit 2
+
+	fi
+
+fi
+
+
+for i in "${sectors[@]}"
+
+do
+
+	if [[ old == "FALSE" ]]
+	then
 		# create csv using new mongo db/collection and build vrt
 		/usr/bin/php5 $base'buildCSV.php' $country $start $end $i
 
-		# remove geojson if it exists (ogr will not overwrite)
-		if [[ -e $base'sector_data/'$country'_'$i'.geojson' ]]
-			then
-				rm $base'sector_data/'$country'_'$i'.geojson'
-		fi
+	else
+		/usr/bin/php5 $base'buildCSV_presenegal.php' $country $i
 
-		# create geojson using vrt
-		ogr2ogr -f GeoJSON $base'sector_data/'$country'_'$i'.geojson' $base'sector_data/'$country'_'$i'.vrt'
+	fi
 
-		# run extracts and join based on builder_data.json contents
-		python /var/www/html/aiddata/data/form/buildExtract.py $country $i
-
-		# check if country / sector is in buildJSON
-		# replace if it exists
-		# add if it does not exist
-		new_line="python /var/www/html/aiddata/data/form/calc.py /var/www/html/aiddata/data/form/form_data/"$country"_"$i".csv $i $country transaction_sum location_count"
-		FILE=$base'buildJSON'
-		same="0"
-		while read line
-		do
-			if [[ $line = $new_line  ]]
-			then
-				same="1"
-			fi
-		done < $FILE
-
-		if [[ $same = "0" ]]
+	# remove geojson if it exists (ogr will not overwrite)
+	if [[ -e $base'sector_data/'$country'_'$i'.geojson' ]]
 		then
-			echo -e $new_line >> $base'buildJSON'
+			rm $base'sector_data/'$country'_'$i'.geojson'
+	fi
 
+	# create geojson using vrt
+	ogr2ogr -f GeoJSON $base'sector_data/'$country'_'$i'.geojson' $base'sector_data/'$country'_'$i'.vrt'
+
+	# run extracts and join based on builder_data.json contents
+	python /var/www/html/aiddata/data/form/buildExtract.py $country $i
+
+	# check if country / sector is in buildJSON
+	# replace if it exists
+	# add if it does not exist
+	new_line="python /var/www/html/aiddata/data/form/calc.py /var/www/html/aiddata/data/form/form_data/"$country"_"$i".csv $i $country transaction_sum location_count"
+	FILE=$base'buildJSON'
+	same="0"
+	while read line
+	do
+		if [[ $line = $new_line  ]]
+		then
+			same="1"
 		fi
+	done < $FILE
 
-		echo $country' '$i' finished'
+	if [[ $same = "0" ]]
+	then
+		echo -e $new_line >> $base'buildJSON'
 
-	done
+	fi
 
-	bash $base'buildJSON'
+	echo $country' '$i' finished'
 
-	echo 'runMongo_presenegal done:'
+done
 
-	T="$(($(date +%s)-T))"
-	echo "Runtime: $((T/60)):$((T%60))"
+bash $base'buildJSON'
 
-else
-	
-	echo 'runMongo_presenegal error'
+echo 'importMongo done:'
 
-fi
+T="$(($(date +%s)-T))"
+echo "	Runtime: $((T/60)):$((T%60))"
