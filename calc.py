@@ -66,6 +66,8 @@ for i in range(0, len(builder_data['raster_data'])):
 	# short (hyphenated) name for general use
 	name = builder_data['raster_data'][i]['name']
 
+	nodata = builder_data['raster_data'][i]['nodata']
+
 	# log names for later use
 	categories.append(name)
 

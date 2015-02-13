@@ -3,20 +3,20 @@
         "Malawi": {
             "continent": "Africa", 
             "info": [
-                0.606, 
+                0.506, 
                 0.869
             ], 
             "line": [
-                0.599, 
-                0.699
+                0.595, 
+                0.695
             ], 
             "type": "old"
         }, 
         "Nepal": {
             "continent": "Asia", 
             "info": [
-                0.769, 
-                0.285
+                0.789, 
+                0.255
             ], 
             "line": [
                 0.745, 
@@ -27,8 +27,8 @@
         "Senegal": {
             "continent": "Africa", 
             "info": [
-                0.385, 
-                0.385
+                0.355, 
+                0.375
             ], 
             "line": [
                 0.454, 
@@ -40,7 +40,7 @@
             "continent": "Asia", 
             "info": [
                 0.741, 
-                0.714
+                0.810
             ], 
             "line": [
                 0.851, 
@@ -51,12 +51,12 @@
         "Uganda": {
             "continent": "Africa", 
             "info": [
-                0.667, 
-                0.526
+                0.550, 
+                0.250
             ], 
             "line": [
-                0.599, 
-                0.592
+                0.589, 
+                0.582
             ], 
             "type": "old"
         }
@@ -67,7 +67,7 @@
             "folder": "agriculture__actual_potential_yield_gap__2000", 
             "form": "low yield areas", 
             "name": "Low-Yield",
-            "nodata": -9999, 
+            "nodata": 247, 
             "stats": {
                 "op": "lte", 
                 "thresh": 0.0, 
