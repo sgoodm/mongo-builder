@@ -179,10 +179,6 @@ with open('/var/www/html/aiddata/data/form/builder_data.json', 'w') as temp_hand
 	json.dump(builder_data, temp_handle, sort_keys = True, indent = 4, ensure_ascii=False)
 
 
-for cat in categories:
-	print cat
-print "x"
-
 # open json for reading
 with open(in_out, 'r') as json_handle:
 
@@ -215,11 +211,13 @@ with open(in_out, 'r') as json_handle:
 
 	# update country>"Total"
 	for j_sector in json_full[in_country]:
-		print j_sector
 		if j_sector != "Total":
-			for j_data in json_full[in_country][j_sector]:
-				if j_data != "type":
-					json_full[in_country]["Total"][j_data] += json_full[in_country][j_sector][j_data]
+			# for j_data in json_full[in_country][j_sector]:
+			# 	if j_data != "type":
+					# json_full[in_country]["Total"][j_data] += json_full[in_country][j_sector][j_data]
+			for cat in categories:
+					if "tot_"+cat in json_full[in_country][j_sector]:
+						json_full[in_country]["Total"]["tot_"+cat] += json_full[in_country][j_sector]["tot_"+cat]
 
 	# calculate input country>"Total" percentages (above update took sum of all fields)	
 	for cat in categories:
@@ -244,20 +242,28 @@ with open(in_out, 'r') as json_handle:
 		if j_country != "Global" and in_sector in json_full[j_country]:
 	
 			# update "Global">type
-			for j_data in json_full[j_country][in_sector]:
-				if j_data != "type":
-					json_full["Global"][in_sector][j_data] += json_full[j_country][in_sector][j_data]
+			# for j_data in json_full[j_country][in_sector]:
+			# 	if j_data != "type":
+			# 		json_full["Global"][in_sector][j_data] += json_full[j_country][in_sector][j_data]
+			for cat in categories:
+				if "tot_"+cat in json_full[j_country][in_sector]:
+					json_full["Global"][in_sector]["tot_"+cat] += json_full[j_country][in_sector]["tot_"+cat]
 
 			# update "Global">"Total"
 			if "Total" in json_full[j_country]:
-				for j_data in json_full[j_country]["Total"]:
-					if j_data != "type":
-						json_full["Global"]["Total"][j_data] += json_full[j_country]["Total"][j_data]
+				# for j_data in json_full[j_country]["Total"]:
+				# 	if j_data != "type":
+				# 		json_full["Global"]["Total"][j_data] += json_full[j_country]["Total"][j_data]
+				for cat in categories:
+					if "tot_"+cat in json_full[j_country]["Total"]:
+						json_full["Global"]["Total"]["tot_"+cat] += json_full[j_country]["Total"]["tot_"+cat]
 
 	# calculate "Global" percentages (above update took sum of all fields)
 	for cat in categories:
-		json_full["Global"][in_sector]["per_"+cat] = 100 * json_full["Global"][in_sector]["tot_"+cat] / json_full["Global"][in_sector]["total"]
-		json_full["Global"]["Total"]["per_"+cat] = 100 * json_full["Global"]["Total"]["tot_"+cat] / json_full["Global"]["Total"]["total"]
+		if json_full["Global"][in_sector]["total"] > 0:
+			json_full["Global"][in_sector]["per_"+cat] = 100 * json_full["Global"][in_sector]["tot_"+cat] / json_full["Global"][in_sector]["total"]
+		if json_full["Global"]["Total"]["total"] > 0:
+			json_full["Global"]["Total"]["per_"+cat] = 100 * json_full["Global"]["Total"]["tot_"+cat] / json_full["Global"]["Total"]["total"]
 
 
 	# ----- Round all new data

@@ -165,7 +165,14 @@ then
 		# check if country / sector is in buildJSON
 		# replace if it exists
 		# add if it does not exist
-		new_line="python /var/www/html/aiddata/data/form/calc.py /var/www/html/aiddata/data/form/form_data/"$country"_"$i".csv $country $i transaction_sum location_count"
+		if [[ $old == "TRUE" ]]
+		then
+			new_line="python /var/www/html/aiddata/data/form/calc.py /var/www/html/aiddata/data/form/form_data/"$country"_"$i".csv $country $i total_commitments location_count"
+
+		else
+			new_line="python /var/www/html/aiddata/data/form/calc.py /var/www/html/aiddata/data/form/form_data/"$country"_"$i".csv $country $i transaction_sum location_count"
+
+		fi
 		FILE=$base'buildJSON'
 		same="0"
 		while read line

@@ -93,17 +93,24 @@
         "Malawi": {
             "Agriculture": {
                 "High-Child-Malnutrition": false, 
+                "High-Natural-Disasters": false, 
                 "Low-Yield": false, 
                 "Urban-Area": false
             }, 
             "Education": {
                 "High-Child-Malnutrition": false, 
+                "High-Natural-Disasters": false, 
                 "Low-Yield": false, 
                 "Urban-Area": false
             }, 
-            "Energy": {}, 
+            "Energy": {
+                "High-Child-Malnutrition": false, 
+                "High-Natural-Disasters": false, 
+                "Urban-Area": false
+            }, 
             "Health": {
                 "High-Child-Malnutrition": false, 
+                "High-Natural-Disasters": false, 
                 "Low-Yield": false, 
                 "Urban-Area": false
             }, 
@@ -114,11 +121,13 @@
             }, 
             "Other": {
                 "High-Child-Malnutrition": false, 
+                "High-Natural-Disasters": false, 
                 "Low-Yield": false, 
                 "Urban-Area": false
             }, 
             "Water": {
                 "High-Child-Malnutrition": false, 
+                "High-Natural-Disasters": false, 
                 "Low-Yield": false, 
                 "Urban-Area": false
             }
@@ -126,17 +135,24 @@
         "Nepal": {
             "Agriculture": {
                 "High-Child-Malnutrition": false, 
+                "High-Natural-Disasters": false, 
                 "Low-Yield": false, 
                 "Urban-Area": false
             }, 
             "Education": {
                 "High-Child-Malnutrition": false, 
+                "High-Natural-Disasters": false, 
                 "Low-Yield": false, 
                 "Urban-Area": false
             }, 
-            "Energy": {}, 
+            "Energy": {
+                "High-Child-Malnutrition": false, 
+                "High-Natural-Disasters": false, 
+                "Urban-Area": false
+            }, 
             "Health": {
                 "High-Child-Malnutrition": false, 
+                "High-Natural-Disasters": false, 
                 "Low-Yield": false, 
                 "Urban-Area": false
             }, 
@@ -147,11 +163,13 @@
             }, 
             "Other": {
                 "High-Child-Malnutrition": false, 
+                "High-Natural-Disasters": false, 
                 "Low-Yield": false, 
                 "Urban-Area": false
             }, 
             "Water": {
                 "High-Child-Malnutrition": false, 
+                "High-Natural-Disasters": false, 
                 "Low-Yield": false, 
                 "Urban-Area": false
             }
@@ -208,17 +226,24 @@
         "Timor-Leste": {
             "Agriculture": {
                 "High-Child-Malnutrition": true, 
+                "High-Natural-Disasters": false, 
                 "Low-Yield": false, 
                 "Urban-Area": false
             }, 
             "Education": {
                 "High-Child-Malnutrition": true, 
+                "High-Natural-Disasters": false, 
                 "Low-Yield": false, 
                 "Urban-Area": false
             }, 
-            "Energy": {}, 
+            "Energy": {
+                "High-Child-Malnutrition": true, 
+                "High-Natural-Disasters": false, 
+                "Urban-Area": false
+            }, 
             "Health": {
                 "High-Child-Malnutrition": true, 
+                "High-Natural-Disasters": false, 
                 "Low-Yield": false, 
                 "Urban-Area": false
             }, 
@@ -229,11 +254,13 @@
             }, 
             "Other": {
                 "High-Child-Malnutrition": true, 
+                "High-Natural-Disasters": false, 
                 "Low-Yield": false, 
                 "Urban-Area": false
             }, 
             "Water": {
                 "High-Child-Malnutrition": true, 
+                "High-Natural-Disasters": false, 
                 "Low-Yield": false, 
                 "Urban-Area": false
             }
@@ -241,17 +268,24 @@
         "Uganda": {
             "Agriculture": {
                 "High-Child-Malnutrition": false, 
+                "High-Natural-Disasters": false, 
                 "Low-Yield": false, 
                 "Urban-Area": false
             }, 
             "Education": {
                 "High-Child-Malnutrition": false, 
+                "High-Natural-Disasters": false, 
                 "Low-Yield": false, 
                 "Urban-Area": false
             }, 
-            "Energy": {}, 
+            "Energy": {
+                "High-Child-Malnutrition": false, 
+                "High-Natural-Disasters": false, 
+                "Urban-Area": false
+            }, 
             "Health": {
                 "High-Child-Malnutrition": false, 
+                "High-Natural-Disasters": false, 
                 "Low-Yield": false, 
                 "Urban-Area": false
             }, 
@@ -262,11 +296,13 @@
             }, 
             "Other": {
                 "High-Child-Malnutrition": false, 
+                "High-Natural-Disasters": false, 
                 "Low-Yield": false, 
                 "Urban-Area": false
             }, 
             "Water": {
                 "High-Child-Malnutrition": false, 
+                "High-Natural-Disasters": false, 
                 "Low-Yield": false, 
                 "Urban-Area": false
             }
