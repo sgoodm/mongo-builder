@@ -62,6 +62,34 @@
         }
     }, 
     "no_data": {
+        "Agriculture": {
+            "Senegal": {
+                "High-Child-Malnutrition": false, 
+                "High-Natural-Disasters": false, 
+                "Urban-Area": false
+            }
+        }, 
+        "Education": {
+            "Senegal": {
+                "High-Child-Malnutrition": false, 
+                "High-Natural-Disasters": false, 
+                "Urban-Area": false
+            }
+        }, 
+        "Energy": {
+            "Senegal": {
+                "High-Child-Malnutrition": false, 
+                "High-Natural-Disasters": false, 
+                "Urban-Area": false
+            }
+        }, 
+        "Health": {
+            "Senegal": {
+                "High-Child-Malnutrition": false, 
+                "High-Natural-Disasters": false, 
+                "Urban-Area": false
+            }
+        }, 
         "Malawi": {
             "Agriculture": {
                 "High-Child-Malnutrition": false, 
@@ -73,6 +101,7 @@
                 "Low-Yield": false, 
                 "Urban-Area": false
             }, 
+            "Energy": {}, 
             "Health": {
                 "High-Child-Malnutrition": false, 
                 "Low-Yield": false, 
@@ -105,6 +134,7 @@
                 "Low-Yield": false, 
                 "Urban-Area": false
             }, 
+            "Energy": {}, 
             "Health": {
                 "High-Child-Malnutrition": false, 
                 "Low-Yield": false, 
@@ -126,19 +156,34 @@
                 "Urban-Area": false
             }
         }, 
+        "Other": {
+            "Senegal": {
+                "High-Child-Malnutrition": false, 
+                "High-Natural-Disasters": false, 
+                "Urban-Area": false
+            }
+        }, 
         "Senegal": {
             "Agriculture": {
                 "High-Child-Malnutrition": false, 
+                "High-Natural-Disasters": false, 
                 "Low-Yield": false, 
                 "Urban-Area": false
             }, 
             "Education": {
                 "High-Child-Malnutrition": false, 
+                "High-Natural-Disasters": false, 
                 "Low-Yield": false, 
+                "Urban-Area": false
+            }, 
+            "Energy": {
+                "High-Child-Malnutrition": false, 
+                "High-Natural-Disasters": false, 
                 "Urban-Area": false
             }, 
             "Health": {
                 "High-Child-Malnutrition": false, 
+                "High-Natural-Disasters": false, 
                 "Low-Yield": false, 
                 "Urban-Area": false
             }, 
@@ -149,11 +194,13 @@
             }, 
             "Other": {
                 "High-Child-Malnutrition": false, 
+                "High-Natural-Disasters": false, 
                 "Low-Yield": false, 
                 "Urban-Area": false
             }, 
             "Water": {
                 "High-Child-Malnutrition": false, 
+                "High-Natural-Disasters": false, 
                 "Low-Yield": false, 
                 "Urban-Area": false
             }
@@ -169,6 +216,7 @@
                 "Low-Yield": false, 
                 "Urban-Area": false
             }, 
+            "Energy": {}, 
             "Health": {
                 "High-Child-Malnutrition": true, 
                 "Low-Yield": false, 
@@ -201,6 +249,7 @@
                 "Low-Yield": false, 
                 "Urban-Area": false
             }, 
+            "Energy": {}, 
             "Health": {
                 "High-Child-Malnutrition": false, 
                 "Low-Yield": false, 
@@ -221,17 +270,24 @@
                 "Low-Yield": false, 
                 "Urban-Area": false
             }
+        }, 
+        "Water": {
+            "Senegal": {
+                "High-Child-Malnutrition": false, 
+                "High-Natural-Disasters": false, 
+                "Urban-Area": false
+            }
         }
     }, 
     "raster_data": [
         {
-            "file": "gap2000_gap_2000_hi_cl.tif", 
-            "folder": "agriculture__actual_potential_yield_gap__2000", 
-            "form": "low yield areas", 
-            "name": "Low-Yield", 
-            "nodata": 247, 
+            "file": "mu0710irmt.tif", 
+            "folder": "natural_disasters__unep_risk_index__2011", 
+            "form": "areas with high risk of natural disasters", 
+            "name": "High-Natural-Disasters", 
+            "nodata": -9999, 
             "stats": {
-                "op": "lte", 
+                "op": "gte", 
                 "thresh": 0.0, 
                 "type": "variable"
             }
@@ -244,8 +300,8 @@
             "nodata": -9999, 
             "stats": {
                 "op": "gte", 
-                "thresh": 300.0, 
-                "type": "fixed"
+                "thresh": 250.0, 
+                "type": "variable"
             }
         }, 
         {

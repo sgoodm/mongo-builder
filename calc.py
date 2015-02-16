@@ -5,7 +5,7 @@
 # ***  ^^^^^
 # *** sector csv files
 # ***  ^^^^^
-# *** PET (using indicator rasters)
+# *** extract data from AOI rasters
 # ***  ^^^^^
 # *** geojson of points
 # ***  ^^^^^
@@ -68,9 +68,7 @@ json_data = blank_json_data.copy()
 # areas of interest names
 categories = []
 
-
-update_builder_data = False
-
+# update_builder_data = False
 
 for i in range(0, len(builder_data['raster_data'])):
 
@@ -88,19 +86,15 @@ for i in range(0, len(builder_data['raster_data'])):
 	blank_json_data["tot_"+name] = 0
 	blank_json_data["per_"+name] = 0
 
-
-	checkcsv_handle = open(in_file, 'r')
-	checkcsv_data = csv.DictReader(checkcsv_handle, delimiter=",")
-	
 	try: 
+		checkcsv_handle = open(in_file, 'r')
+		checkcsv_data = csv.DictReader(checkcsv_handle, delimiter=",")
 		test = checkcsv_data.next()[folder]
 		test = True
+		checkcsv_handle.close()
 
 	except:
 		test = False
-
-	checkcsv_handle.close()
-
 
 	if test == True:
 
@@ -129,14 +123,13 @@ for i in range(0, len(builder_data['raster_data'])):
 			sd["sd"] = numpy.std(sd["raw"])
 			sd["mean"] = numpy.mean(sd["raw"])
 			sd["quart"] = numpy.percentile(sd["raw"], 25)
-			sd["thresh"] = sd["quart"]
 
-			# update builder_data.json with calculated thresh
-			if builder_data['raster_data'][i]['stats']['thresh'] != sd["thresh"]:
-				update_builder_data = True
-				builder_data['raster_data'][i]['stats']['thresh'] = sd["thresh"]
+			sd["thresh"] = sd["mean"]
 
 			precsv_handle.close()
+		else:
+			sd["thresh"] = builder_data['raster_data'][i]['stats']['thresh']
+
 
 
 		# build object from processed input data
@@ -157,16 +150,19 @@ for i in range(0, len(builder_data['raster_data'])):
 			if float(row[folder]) == float(nodata):
 				sd['nodata'] += 1
 
-			if builder_data['raster_data'][i]['stats']['op'] == 'lte' and float(row[folder]) <= builder_data['raster_data'][i]['stats']['thresh']:
+
+			if builder_data['raster_data'][i]['stats']['op'] == 'lte' and float(row[folder]) <= sd["thresh"]:
 				json_data["tot_"+name] += aid
-			elif builder_data['raster_data'][i]['stats']['op'] == 'gte' and float(row[folder]) >= builder_data['raster_data'][i]['stats']['thresh']:
+			elif builder_data['raster_data'][i]['stats']['op'] == 'gte' and float(row[folder]) >= sd["thresh"]:
 				json_data["tot_"+name] += aid
-			elif builder_data['raster_data'][i]['stats']['op'] == 'eq' and float(row[folder]) == builder_data['raster_data'][i]['stats']['thresh']:
+			elif builder_data['raster_data'][i]['stats']['op'] == 'eq' and float(row[folder]) == sd["thresh"]:
 				json_data["tot_"+name] += aid
+
 
 		csv_handle.close()
 
-		json_data["per_"+name] = 100 * json_data["tot_"+name] / json_data["total"]
+		if json_data["total"] > 0:
+			json_data["per_"+name] = 100 * json_data["tot_"+name] / json_data["total"]
 
 		# check nodata vs count
 		builder_data['no_data'][in_country][in_sector][name] = False
@@ -182,6 +178,10 @@ builder_data_handle.close()
 with open('/var/www/html/aiddata/data/form/builder_data.json', 'w') as temp_handle:
 	json.dump(builder_data, temp_handle, sort_keys = True, indent = 4, ensure_ascii=False)
 
+
+for cat in categories:
+	print cat
+print "x"
 
 # open json for reading
 with open(in_out, 'r') as json_handle:
@@ -214,15 +214,17 @@ with open(in_out, 'r') as json_handle:
 	json_full[in_country]["Total"]["type"] = "Total"
 
 	# update country>"Total"
-	for j_type in json_full[in_country]:
-		if j_type != "Total":
-			for j_data in json_full[in_country][j_type]:
+	for j_sector in json_full[in_country]:
+		print j_sector
+		if j_sector != "Total":
+			for j_data in json_full[in_country][j_sector]:
 				if j_data != "type":
-					json_full[in_country]["Total"][j_data] += json_full[in_country][j_type][j_data]			
+					json_full[in_country]["Total"][j_data] += json_full[in_country][j_sector][j_data]
 
 	# calculate input country>"Total" percentages (above update took sum of all fields)	
 	for cat in categories:
-		json_full[in_country]["Total"]["per_"+cat] = 100 * json_full[in_country]["Total"]["tot_"+cat] / json_full[in_country]["Total"]["total"]
+		if json_full[in_country]["Total"]["total"] > 0:
+			json_full[in_country]["Total"]["per_"+cat] = 100 * json_full[in_country]["Total"]["tot_"+cat] / json_full[in_country]["Total"]["total"]
 
 	# init "Global" if it does not exist
 	if not "Global" in json_full :
@@ -245,7 +247,7 @@ with open(in_out, 'r') as json_handle:
 			for j_data in json_full[j_country][in_sector]:
 				if j_data != "type":
 					json_full["Global"][in_sector][j_data] += json_full[j_country][in_sector][j_data]
-			
+
 			# update "Global">"Total"
 			if "Total" in json_full[j_country]:
 				for j_data in json_full[j_country]["Total"]:
@@ -275,3 +277,5 @@ with open(in_out, 'r') as json_handle:
 with open(in_out, 'w') as json_handle:
 	# dump json back into file
  	json.dump(json_full, json_handle, sort_keys = True, indent = 4, ensure_ascii=False)
+
+print "calc.py : finished ( " +in_country+" "+in_sector+ ")"

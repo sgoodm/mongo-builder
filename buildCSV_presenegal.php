@@ -9,20 +9,20 @@
 	$collection = "complete";
 
 	$filter = 'ad_sector_names';
-	$sector = $argv[2]; // industry name
+	$sector = $argv[2]; // sector name
 
 	$sub_options = array(
 			"Agriculture" => array( new MongoRegex("/.*" . "Agriculture" . ".*/i") ),
 			"Education"   => array( new MongoRegex("/.*" . "Education" . ".*/i") ),
 			"Health"      => array( new MongoRegex("/.*" . "Health" . ".*/i") ),
-			"Industry"	  => array( new MongoRegex("/.*" . "Industry" . ".*/i") ),
+			"Energy"	  => array( new MongoRegex("/.*" . "Energy" . ".*/i") ),
 			"Water"       => array( new MongoRegex("/.*" . "Water" . ".*/i") ),
 
 			"Other" 	  => array( 
 									new MongoRegex("/^((?!Agriculture).)*$/i"), 
 									new MongoRegex("/^((?!Education).)*$/i"), 
 									new MongoRegex("/^((?!Health).)*$/i"), 
-									new MongoRegex("/^((?!Industry).)*$/i"), 
+									new MongoRegex("/^((?!Energy).)*$/i"), 
 									new MongoRegex("/^((?!Water).)*$/i")
 								)
 		);
@@ -107,12 +107,11 @@
 
 	    file_put_contents($filename.".vrt", $vrt);
 
-		$out = "buildCSV.php : query successful. results in: ".$filename;
+		$out = "  buildCSV.php : ".$database." ".$sector." query successful. \n  buildCSV.php : ".$database." ".$sector." results in ".$filename."\n";
 
 	} else {
-		$out = "buildCSV.php : no data from query";
+		$out = "  buildCSV.php : no data from ".$database." ".$sector." query.\n";
 	}
-
 	echo $out;
 
 ?>

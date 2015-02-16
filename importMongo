@@ -22,15 +22,18 @@
 # 
 # --------------------------------------------------------------------------
 # 
-# 	TODO
+# 	~DONE 
 # 		- merge with presenegal builder and add pre-senegal format as an optional input flag
-# 		- merge buildCSV scripts
-# 		- add optional input flags / options to just run parts of script (ie: dont reload mongo, dont do extractions, just rerun calc.py)
-# 		- improve validation and file checking
 # 		- add/improve status updates
+# 		- add optional input flags / options to just run parts of script (ie: dont reload mongo, dont do extractions, just rerun calc.py)
+# 
+# 	TODO
+# 		- merge buildCSV scripts
+# 		- improve validation and file checking
 # 		- add log (each time it is run, events, time to run, etc.)
 # 		- use temp folder until everything has completed successfully
-# 
+# 		- add some type of reference to check against when using new AOI raster to prevent running calc.py before all countries have been updated
+# 		- create script to run importMongo for each country
 # 
 # --------------------------------------------------------------------------
 
@@ -40,37 +43,47 @@ base='/var/www/html/aiddata/data/form/'
 
 start='2005'
 end='2014'
-sectors=('Agriculture' 'Education' 'Health' 'Industry' 'Water' 'Other')
+sectors=('Agriculture' 'Education' 'Health' 'Energy' 'Water' 'Other')
 
 country=""
 old="FALSE"
-while getopts "hpc:" opt
+runx="FALSE"
+runy="FALSE"
+runz="FALSE"
+while getopts "xyzhpc:" opt
 
 do
 	case "${opt}" in
 	    h)        
             echo " "
-            echo "options:"
-            echo "-h                	show help"
-            echo "-c [COUNTRY]       	specify the country to run the script for [required]"
-            echo "-p       				identify country as pre-senegal format"
-                        
+            echo "  options:"
+            echo "    -h                		show help"
+            echo "    -c [COUNTRY]       		specify the country to run the script for [required]"
+            echo "    -p       					identify country as pre-senegal format"
+            echo "    -x       					create new mongodb"
+            echo "    -y       					run extract scripts"
+            echo "    -z       					run calc.py"
+         
 			echo 
 			;;
 	    c) country=${OPTARG} ;;
 		p) old="TRUE" ;;
-	    *) echo "Unexpected option ${opt}"; exit ;;
+		x) runz="TRUE" ;;
+		y) runy="TRUE" ;;
+		z) runz="TRUE" ;;
+
+	    *) echo "  Unexpected option ${opt}"; exit ;;
   	esac
 
 done
 
 if [[ $country == "" ]]
 then 
-	echo "A country input is required."
+	echo "  A country input is required."
 	exit 1
 fi
 
-if [[ old == "FALSE" ]]
+if [[ $old == "FALSE" && $runx == "TRUE" ]]
 
 then
 
@@ -91,9 +104,8 @@ then
 		# fi
 		# -----
 
-
 		# create copy of locations file to use for processing
-		mv $base'active/'$country'/locations.tsv' $base'active/'$country'/locations_update.tsv'
+		cp $base'active/'$country'/locations.tsv' $base'active/'$country'/locations_update.tsv'
 
 		# update new locations file with location_count field
 		python $base'locationCount.py' $base'active/'$country'/locations.tsv' $base'active/'$country'/locations_update.tsv'
@@ -104,9 +116,10 @@ then
 		# import into new mongo db/collection
 		mongoimport --drop --db $country --collection complete --type json --file $base'active/'$country'/complete.json'
 
+
 	else
 
-		echo "Required files not found"
+		echo "  Required files not found"
 		exit 2
 
 	fi
@@ -114,59 +127,74 @@ then
 fi
 
 
-for i in "${sectors[@]}"
+if [[ $runy == "TRUE" ]]
 
-do
+then
 
-	if [[ old == "FALSE" ]]
-	then
-		# create csv using new mongo db/collection and build vrt
-		/usr/bin/php5 $base'buildCSV.php' $country $start $end $i
+	for i in "${sectors[@]}"
 
-	else
-		/usr/bin/php5 $base'buildCSV_presenegal.php' $country $i
+	do
+		echo "  starting "$country" "$i"..."
 
-	fi
+		if [[ $old == "FALSE" ]]
+		then
+			# create csv using new mongo db/collection and build vrt
+			/usr/bin/php5 $base'buildCSV.php' $country $start $end $i
 
-	# remove geojson if it exists (ogr will not overwrite)
-	if [[ -e $base'sector_data/'$country'_'$i'.geojson' ]]
+		else
+			/usr/bin/php5 $base'buildCSV_presenegal.php' $country $i
+
+		fi
+
+		# remove geojson if it exists (ogr will not overwrite)
+		if [[ -e $base'sector_data/'$country'_'$i'.geojson' ]]
 		then
 			rm $base'sector_data/'$country'_'$i'.geojson'
-	fi
-
-	# create geojson using vrt
-	ogr2ogr -f GeoJSON $base'sector_data/'$country'_'$i'.geojson' $base'sector_data/'$country'_'$i'.vrt'
-
-	# run extracts and join based on builder_data.json contents
-	python /var/www/html/aiddata/data/form/buildExtract.py $country $i
-
-	# check if country / sector is in buildJSON
-	# replace if it exists
-	# add if it does not exist
-	new_line="python /var/www/html/aiddata/data/form/calc.py /var/www/html/aiddata/data/form/form_data/"$country"_"$i".csv $i $country transaction_sum location_count"
-	FILE=$base'buildJSON'
-	same="0"
-	while read line
-	do
-		if [[ $line = $new_line  ]]
-		then
-			same="1"
 		fi
-	done < $FILE
 
-	if [[ $same = "0" ]]
-	then
-		echo -e $new_line >> $base'buildJSON'
+		# create geojson using vrt
+		ogr2ogr -f GeoJSON $base'sector_data/'$country'_'$i'.geojson' $base'sector_data/'$country'_'$i'.vrt'
 
-	fi
+		echo "  "$country" "$i" geojson built"
 
-	echo $country' '$i' finished'
+		# run extracts and join based on builder_data.json contents
+		python /var/www/html/aiddata/data/form/buildExtract.py $country $i
 
-done
 
-bash $base'buildJSON'
 
-echo 'importMongo done:'
+		# check if country / sector is in buildJSON
+		# replace if it exists
+		# add if it does not exist
+		new_line="python /var/www/html/aiddata/data/form/calc.py /var/www/html/aiddata/data/form/form_data/"$country"_"$i".csv $country $i transaction_sum location_count"
+		FILE=$base'buildJSON'
+		same="0"
+		while read line
+		do
+			if [[ $line = $new_line  ]]
+			then
+				same="1"
+			fi
+		done < $FILE
+
+		if [[ $same = "0" ]]
+		then
+			echo -e $new_line >> $base'buildJSON'
+
+		fi
+
+		echo '  '$country' '$i' finished'
+
+	done
+fi
+
+if [[ $runz == "TRUE" ]]
+
+then
+	bash $base'buildJSON'
+
+fi
+
+echo '  importMongo done:'
 
 T="$(($(date +%s)-T))"
-echo "	Runtime: $((T/60)):$((T%60))"
+echo "    Runtime: $((T/60)):$((T%60))"

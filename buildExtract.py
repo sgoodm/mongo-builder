@@ -130,3 +130,5 @@ if new_country == True:
 	with open('/var/www/html/aiddata/data/form/builder_data.json', 'w') as json_handle:
 		# dump json back into file
 	 	json.dump(json_full, json_handle, sort_keys = True, indent = 4, ensure_ascii=False)
+
+print "  buildExtract.py : "+country+" "+sector+" finished"
