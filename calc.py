@@ -215,9 +215,11 @@ with open(in_out, 'r') as json_handle:
 			# for j_data in json_full[in_country][j_sector]:
 			# 	if j_data != "type":
 					# json_full[in_country]["Total"][j_data] += json_full[in_country][j_sector][j_data]
+			json_full[in_country]["Total"]["projects"] += json_full[in_country][j_sector]["projects"]
 			for cat in categories:
 					if "tot_"+cat in json_full[in_country][j_sector]:
 						json_full[in_country]["Total"]["tot_"+cat] += json_full[in_country][j_sector]["tot_"+cat]
+						json_full[in_country]["Total"]["total"] += json_full[in_country][j_sector]["tot_"+cat]
 
 	# calculate input country>"Total" percentages (above update took sum of all fields)	
 	for cat in categories:
@@ -245,18 +247,23 @@ with open(in_out, 'r') as json_handle:
 			# for j_data in json_full[j_country][in_sector]:
 			# 	if j_data != "type":
 			# 		json_full["Global"][in_sector][j_data] += json_full[j_country][in_sector][j_data]
+			json_full["Global"][in_sector]["projects"] += json_full[j_country][in_sector]["projects"]
 			for cat in categories:
 				if "tot_"+cat in json_full[j_country][in_sector]:
 					json_full["Global"][in_sector]["tot_"+cat] += json_full[j_country][in_sector]["tot_"+cat]
+					json_full["Global"][in_sector]["total"] += json_full[j_country][in_sector]["tot_"+cat]
 
 			# update "Global">"Total"
 			if "Total" in json_full[j_country]:
 				# for j_data in json_full[j_country]["Total"]:
 				# 	if j_data != "type":
 				# 		json_full["Global"]["Total"][j_data] += json_full[j_country]["Total"][j_data]
+				json_full["Global"]["Total"]["projects"] += json_full[j_country]["Total"]["projects"]
 				for cat in categories:
 					if "tot_"+cat in json_full[j_country]["Total"]:
 						json_full["Global"]["Total"]["tot_"+cat] += json_full[j_country]["Total"]["tot_"+cat]
+						json_full["Global"]["Total"]["total"] += json_full[j_country]["Total"]["tot_"+cat]
+
 
 	# calculate "Global" percentages (above update took sum of all fields)
 	for cat in categories:

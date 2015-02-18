@@ -324,8 +324,8 @@
             "nodata": -9999, 
             "stats": {
                 "op": "gte", 
-                "thresh": 0.0, 
-                "type": "variable"
+                "thresh": 3, 
+                "type": "fixed"
             }
         }, 
         {
