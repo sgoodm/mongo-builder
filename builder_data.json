@@ -44,7 +44,7 @@
             ], 
             "line": [
                 0.851, 
-                0.658
+                0.6605
             ], 
             "type": "new"
         }, 
@@ -319,7 +319,7 @@
         {
             "file": "mu0710irmt.tif", 
             "folder": "natural_disasters__unep_risk_index__2011", 
-            "form": "areas with high risk of natural disasters", 
+            "form": "high risk of natural disasters", 
             "name": "High-Natural-Disasters", 
             "nodata": -9999, 
             "stats": {
@@ -331,7 +331,7 @@
         {
             "file": "uw.asc", 
             "folder": "socioeconomics__child_malnutrition__2002", 
-            "form": "areas with high child malnutrition", 
+            "form": "high child malnutrition", 
             "name": "High-Child-Malnutrition", 
             "nodata": -9999, 
             "stats": {
@@ -343,7 +343,7 @@
         {
             "file": "glurextents.asc", 
             "folder": "socioeconomics__urban_areas__1995", 
-            "form": "urban areas", 
+            "form": "high urban populations", 
             "name": "Urban-Area", 
             "nodata": -9999, 
             "stats": {
@@ -352,5 +352,167 @@
                 "type": "fixed"
             }
         }
-    ]
+    ], 
+    "thresh_data": {
+        "Malawi": {
+            "Agriculture": {
+                "High-Child-Malnutrition": 252.39302325581394, 
+                "High-Natural-Disasters": 3, 
+                "Urban-Area": 2
+            }, 
+            "Education": {
+                "High-Child-Malnutrition": 255.72674418604652, 
+                "High-Natural-Disasters": 3, 
+                "Urban-Area": 2
+            }, 
+            "Energy": {
+                "High-Child-Malnutrition": 257.26666666666665, 
+                "High-Natural-Disasters": 3, 
+                "Urban-Area": 2
+            }, 
+            "Health": {
+                "High-Child-Malnutrition": 254.65934065934067, 
+                "High-Natural-Disasters": 3, 
+                "Urban-Area": 2
+            }, 
+            "Other": {
+                "High-Child-Malnutrition": 251.1484375, 
+                "High-Natural-Disasters": 3, 
+                "Urban-Area": 2
+            }, 
+            "Water": {
+                "High-Child-Malnutrition": 253.37058823529412, 
+                "High-Natural-Disasters": 3, 
+                "Urban-Area": 2
+            }
+        }, 
+        "Nepal": {
+            "Agriculture": {
+                "High-Child-Malnutrition": 492.5699865410498, 
+                "High-Natural-Disasters": 3, 
+                "Urban-Area": 2
+            }, 
+            "Education": {
+                "High-Child-Malnutrition": 486.45854377104376, 
+                "High-Natural-Disasters": 3, 
+                "Urban-Area": 2
+            }, 
+            "Energy": {
+                "High-Child-Malnutrition": 486.58015267175574, 
+                "High-Natural-Disasters": 3, 
+                "Urban-Area": 2
+            }, 
+            "Health": {
+                "High-Child-Malnutrition": 488.1747324708513, 
+                "High-Natural-Disasters": 3, 
+                "Urban-Area": 2
+            }, 
+            "Other": {
+                "High-Child-Malnutrition": 493.46890454068637, 
+                "High-Natural-Disasters": 3, 
+                "Urban-Area": 2
+            }, 
+            "Water": {
+                "High-Child-Malnutrition": 483.44774193548386, 
+                "High-Natural-Disasters": 3, 
+                "Urban-Area": 2
+            }
+        }, 
+        "Senegal": {
+            "Agriculture": {
+                "High-Child-Malnutrition": 263.07964601769913, 
+                "High-Natural-Disasters": 3, 
+                "Urban-Area": 2
+            }, 
+            "Education": {
+                "High-Child-Malnutrition": 234.29268292682926, 
+                "High-Natural-Disasters": 3, 
+                "Urban-Area": 2
+            }, 
+            "Energy": {
+                "High-Child-Malnutrition": 249.97560975609755, 
+                "High-Natural-Disasters": 3, 
+                "Urban-Area": 2
+            }, 
+            "Health": {
+                "High-Child-Malnutrition": 256.69444444444446, 
+                "High-Natural-Disasters": 3, 
+                "Urban-Area": 2
+            }, 
+            "Other": {
+                "High-Child-Malnutrition": 231.52463768115942, 
+                "High-Natural-Disasters": 3, 
+                "Urban-Area": 2
+            }, 
+            "Water": {
+                "High-Child-Malnutrition": 243.16, 
+                "High-Natural-Disasters": 3, 
+                "Urban-Area": 2
+            }
+        }, 
+        "Timor-Leste": {
+            "Agriculture": {
+                "High-Child-Malnutrition": 264.0, 
+                "High-Natural-Disasters": 3, 
+                "Urban-Area": 2
+            }, 
+            "Education": {
+                "High-Child-Malnutrition": 264.0, 
+                "High-Natural-Disasters": 3, 
+                "Urban-Area": 2
+            }, 
+            "Energy": {
+                "High-Child-Malnutrition": "NODATA", 
+                "High-Natural-Disasters": 3, 
+                "Urban-Area": 2
+            }, 
+            "Health": {
+                "High-Child-Malnutrition": 264.0, 
+                "High-Natural-Disasters": 3, 
+                "Urban-Area": 2
+            }, 
+            "Other": {
+                "High-Child-Malnutrition": 264.0, 
+                "High-Natural-Disasters": 3, 
+                "Urban-Area": 2
+            }, 
+            "Water": {
+                "High-Child-Malnutrition": "NODATA", 
+                "High-Natural-Disasters": 3, 
+                "Urban-Area": 2
+            }
+        }, 
+        "Uganda": {
+            "Agriculture": {
+                "High-Child-Malnutrition": 272.80213903743316, 
+                "High-Natural-Disasters": 3, 
+                "Urban-Area": 2
+            }, 
+            "Education": {
+                "High-Child-Malnutrition": 280.5810276679842, 
+                "High-Natural-Disasters": 3, 
+                "Urban-Area": 2
+            }, 
+            "Energy": {
+                "High-Child-Malnutrition": 227.03846153846155, 
+                "High-Natural-Disasters": 3, 
+                "Urban-Area": 2
+            }, 
+            "Health": {
+                "High-Child-Malnutrition": 258.31853281853284, 
+                "High-Natural-Disasters": 3, 
+                "Urban-Area": 2
+            }, 
+            "Other": {
+                "High-Child-Malnutrition": 265.9376979936642, 
+                "High-Natural-Disasters": 3, 
+                "Urban-Area": 2
+            }, 
+            "Water": {
+                "High-Child-Malnutrition": 257.21311475409834, 
+                "High-Natural-Disasters": 3, 
+                "Urban-Area": 2
+            }
+        }
+    }
 }

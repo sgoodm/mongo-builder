@@ -43,6 +43,7 @@ builder_data_handle = open('/var/www/html/aiddata/data/form/builder_data.json', 
 # load raster data from json
 builder_data = json.load(builder_data_handle)
 
+# init no_data object
 try:
 	nd_check = builder_data['no_data'][in_country]
 except:
@@ -52,6 +53,20 @@ try:
 	nd_check = builder_data['no_data'][in_country][in_sector]
 except:
 	builder_data['no_data'][in_country][in_sector] = {}
+
+def data_check(dc):
+	try:
+		nd_check = builder_data[dc][in_country]
+	except:
+		builder_data[dc][in_country] = {}
+
+	try:
+		nd_check = builder_data[dc][in_country][in_sector]
+	except:
+		builder_data[dc][in_country][in_sector] = {}
+
+# init no_data object
+data_check('thresh_data')
 
 
 # general use blank data
@@ -118,11 +133,17 @@ for i in range(0, len(builder_data['raster_data'])):
 			precsv_data = csv.DictReader(precsv_handle, delimiter=",")
 
 			for pre_row in precsv_data:
-				sd["raw"].append( float(pre_row[folder]) )
+				if float(pre_row[folder]) != float(nodata):
+					# print float(pre_row[folder])
+					sd["raw"].append( float(pre_row[folder]) )
 
-			sd["sd"] = numpy.std(sd["raw"])
-			sd["mean"] = numpy.mean(sd["raw"])
-			sd["quart"] = numpy.percentile(sd["raw"], 25)
+			if len(sd["raw"]) > 0:
+				# sd["sd"] = numpy.std(sd["raw"])
+				# sd["quart"] = numpy.percentile(sd["raw"], 25)
+				sd["mean"] = numpy.mean(sd["raw"])
+
+			else:
+				sd["mean"] = "NODATA"
 
 			sd["thresh"] = sd["mean"]
 
@@ -130,7 +151,7 @@ for i in range(0, len(builder_data['raster_data'])):
 		else:
 			sd["thresh"] = builder_data['raster_data'][i]['stats']['thresh']
 
-
+		builder_data['thresh_data'][in_country][in_sector][name] = sd["thresh"]
 
 		# build object from processed input data
 		csv_handle = open(in_file, 'r')
