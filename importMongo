@@ -68,7 +68,7 @@ do
 			;;
 	    c) country=${OPTARG} ;;
 		p) old="TRUE" ;;
-		x) runz="TRUE" ;;
+		x) runx="TRUE" ;;
 		y) runy="TRUE" ;;
 		z) runz="TRUE" ;;
 
@@ -83,61 +83,72 @@ then
 	exit 1
 fi
 
-if [[ $old == "FALSE" && $runx == "TRUE" ]]
+if [[ $runx == "TRUE" ]]; then
 
-then
+	if [[ $old == "FALSE" ]]; then
 
-	# make sure all files exists
-	if [[ -e $base'active/'$country && -e $base'active/'$country'/projects.tsv' && -e $base'active/'$country'/transactions.tsv' && -e $base'active/'$country'/locations.tsv' ]]
+		# make sure all files exists
+		if [[ -e $base'active/'$country && -e $base'active/'$country'/projects.tsv' && -e $base'active/'$country'/transactions.tsv' && -e $base'active/'$country'/locations.tsv' ]]; then
+	
+			# -----
+			# if [[ -e $base'active/'$country'/locations_update.tsv']]
+			# 	then
+			# 		read -p "locations_update.tsv already exists for this country. Are you sure you want to continue? " -r
+			# 		if [[ ! $REPLY =~ ^[Yy]$ ]]
+			# 			then
+			# 			    exit 1
+			# 		fi
+			# fi
+			# -----
 
-	then
-		
+			# create copy of locations file to use for processing
+			cp $base'active/'$country'/locations.tsv' $base'active/'$country'/locations_update.tsv'
 
-		# -----
-		# if [[ -e $base'active/'$country'/locations_update.tsv']]
-		# 	then
-		# 		read -p "locations_update.tsv already exists for this country. Are you sure you want to continue? " -r
-		# 		if [[ ! $REPLY =~ ^[Yy]$ ]]
-		# 			then
-		# 			    exit 1
-		# 		fi
-		# fi
-		# -----
+			# update new locations file with location_count field
+			python $base'locationCount.py' $base'active/'$country'/locations.tsv' $base'active/'$country'/locations_update.tsv'
 
-		# create copy of locations file to use for processing
-		cp $base'active/'$country'/locations.tsv' $base'active/'$country'/locations_update.tsv'
+			# build mongo ready JSON-like file
+			python $base'buildMongo.py' $base'active/'$country
 
-		# update new locations file with location_count field
-		python $base'locationCount.py' $base'active/'$country'/locations.tsv' $base'active/'$country'/locations_update.tsv'
+			# import into new mongo db/collection
+			mongoimport --drop --db $country --collection complete --type json --file $base'active/'$country'/complete.json'
 
-		# build mongo ready JSON-like file
-		python $base'buildMongo.py' $base'active/'$country
+		else
+			echo "  Required Senegal format files not found"
+			exit 2
 
-		# import into new mongo db/collection
-		mongoimport --drop --db $country --collection complete --type json --file $base'active/'$country'/complete.json'
-
+		fi
 
 	else
+		# make sure all files exists
+		if [[ -e $base'active/'$country && -e $base'active/'$country'/'$country'.csv' ]]; then
+	
+			# All pre-Senegal releases were run through locationCount.py prior to being added to "active" folder
+			# update new locations file with location_count field
+			# python $base'locationCount.py' $base'active/'$country'/'$country'.csv' $base'active/'$country'/complete.csv'
 
-		echo "  Required files not found"
-		exit 2
+			# import into new mongo db/collection
+			mongoimport --drop --db $country --collection complete --type csv --headerline --file $base'active/'$country'/'$country'.csv'
 
+		else
+			echo "  Required pre-Senegal format file not found"
+			exit 2
+
+		fi 
+		
 	fi
 
 fi
 
 
-if [[ $runy == "TRUE" ]]
-
-then
+if [[ $runy == "TRUE" ]]; then
 
 	for i in "${sectors[@]}"
 
 	do
 		echo "  starting "$country" "$i"..."
 
-		if [[ $old == "FALSE" ]]
-		then
+		if [[ $old == "FALSE" ]]; then
 			# create csv using new mongo db/collection and build vrt
 			/usr/bin/php5 $base'buildCSV.php' $country $start $end $i
 
@@ -147,8 +158,7 @@ then
 		fi
 
 		# remove geojson if it exists (ogr will not overwrite)
-		if [[ -e $base'sector_data/'$country'_'$i'.geojson' ]]
-		then
+		if [[ -e $base'sector_data/'$country'_'$i'.geojson' ]]; then
 			rm $base'sector_data/'$country'_'$i'.geojson'
 		fi
 
@@ -165,8 +175,7 @@ then
 		# check if country / sector is in buildJSON
 		# replace if it exists
 		# add if it does not exist
-		if [[ $old == "TRUE" ]]
-		then
+		if [[ $old == "TRUE" ]]; then
 			new_line="python /var/www/html/aiddata/data/form/calc.py /var/www/html/aiddata/data/form/form_data/"$country"_"$i".csv $country $i total_commitments location_count"
 
 		else
@@ -177,16 +186,13 @@ then
 		same="0"
 		while read line
 		do
-			if [[ $line = $new_line  ]]
-			then
+			if [[ $line = $new_line  ]]; then
 				same="1"
 			fi
 		done < $FILE
 
-		if [[ $same = "0" ]]
-		then
+		if [[ $same = "0" ]]; then
 			echo -e $new_line >> $base'buildJSON'
-
 		fi
 
 		echo '  '$country' '$i' finished'
@@ -194,9 +200,7 @@ then
 	done
 fi
 
-if [[ $runz == "TRUE" ]]
-
-then
+if [[ $runz == "TRUE" ]]; then
 	bash $base'buildJSON'
 
 fi
