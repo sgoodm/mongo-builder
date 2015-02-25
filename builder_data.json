@@ -62,34 +62,6 @@
         }
     }, 
     "no_data": {
-        "Agriculture": {
-            "Senegal": {
-                "High-Child-Malnutrition": false, 
-                "High-Natural-Disasters": false, 
-                "Urban-Area": false
-            }
-        }, 
-        "Education": {
-            "Senegal": {
-                "High-Child-Malnutrition": false, 
-                "High-Natural-Disasters": false, 
-                "Urban-Area": false
-            }
-        }, 
-        "Energy": {
-            "Senegal": {
-                "High-Child-Malnutrition": false, 
-                "High-Natural-Disasters": false, 
-                "Urban-Area": false
-            }
-        }, 
-        "Health": {
-            "Senegal": {
-                "High-Child-Malnutrition": false, 
-                "High-Natural-Disasters": false, 
-                "Urban-Area": false
-            }
-        }, 
         "Malawi": {
             "Agriculture": {
                 "High-Child-Malnutrition": false, 
@@ -171,13 +143,6 @@
                 "High-Child-Malnutrition": false, 
                 "High-Natural-Disasters": false, 
                 "Low-Yield": false, 
-                "Urban-Area": false
-            }
-        }, 
-        "Other": {
-            "Senegal": {
-                "High-Child-Malnutrition": false, 
-                "High-Natural-Disasters": false, 
                 "Urban-Area": false
             }
         }, 
@@ -304,13 +269,6 @@
                 "High-Child-Malnutrition": false, 
                 "High-Natural-Disasters": false, 
                 "Low-Yield": false, 
-                "Urban-Area": false
-            }
-        }, 
-        "Water": {
-            "Senegal": {
-                "High-Child-Malnutrition": false, 
-                "High-Natural-Disasters": false, 
                 "Urban-Area": false
             }
         }
